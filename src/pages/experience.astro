@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ViewSwitcher from '@/components/ViewSwitcher.astro';
+import ExperienceTimeline from '@/components/ExperienceTimeline.astro';
+---
+
+<BaseLayout
+  page="experience"
+  title="Experience · Yuyeon Kim"
+  description="Research, industry collaboration, robotics, teaching, operations, and early work experience."
+>
+  <PageHero
+    index="03"
+    eyebrow="Full career archive"
+    title="The visible result and the work behind it."
+    intro="Research is the center of the portfolio, but the complete timeline also preserves teaching, operations, labeling, and customer-facing work that shaped how I deliver."
+  />
+
+  <section class="switcher-band page-switcher"><div class="shell"><ViewSwitcher compact /></div></section>
+
+  <section class="shell section-space experience-page">
+    <div class="archive-intro">
+      <p><span data-view-label>All experience</span> · chronological view</p>
+      <p>Use All to reveal the early-career archive.</p>
+    </div>
+    <ExperienceTimeline full />
+
+    <div class="operations-grid">
+      <article>
+        <p class="eyebrow">Teaching</p>
+        <h2>Translate complexity without lowering the standard.</h2>
+        <ul>
+          <li><b>Data Structures TA</b><span>POSTECH · 2025</span></li>
+          <li><b>Youth AI Big Data TA</b><span>POSTECH · 2024</span></li>
+          <li><b>Data Structures & Algorithms TA</b><span>Dongguk · 2023–2024</span></li>
+        </ul>
+      </article>
+      <article>
+        <p class="eyebrow">Research operations</p>
+        <h2>Automate the handoff, then document the exception.</h2>
+        <p>As lab manager, I automated recurring cleaning and calendar notices with Slack and built a Notion + ChatGPT handoff workflow that became the lab’s operating pipeline.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

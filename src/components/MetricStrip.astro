@@ -1,0 +1,28 @@
+---
+import { metrics } from '@/data/portfolio';
+
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+const shownMetrics = typeof limit === 'number' ? metrics.slice(0, limit) : metrics;
+---
+
+<div class="metric-strip" aria-label="Selected outcomes">
+  {shownMetrics.map((metric) => (
+    <article class="metric-cell" data-views={metric.views.join(' ')}>
+      <p
+        class="metric-value"
+        data-count={metric.number}
+        data-prefix={metric.prefix}
+        data-suffix={metric.suffix}
+        data-direction={metric.direction}
+      >
+        {metric.value}{metric.direction ? ` ${metric.direction}` : ''}
+      </p>
+      <p class="metric-label">{metric.label}</p>
+      <p class="metric-context">{metric.context}</p>
+    </article>
+  ))}
+</div>

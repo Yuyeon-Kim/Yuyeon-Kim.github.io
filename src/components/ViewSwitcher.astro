@@ -1,0 +1,29 @@
+---
+import { views } from '@/data/portfolio';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['view-switcher', { compact }]} aria-label="Recruiter view">
+  <div class="view-switcher-label">
+    <span class="eyebrow">View as</span>
+    <strong data-view-label>All experience</strong>
+  </div>
+  <div class="view-options" role="group" aria-label="Choose a portfolio perspective">
+    {views.map((view) => (
+      <button
+        type="button"
+        data-view-option={view.key}
+        data-view-name={view.label}
+        aria-pressed={view.key === 'all' ? 'true' : 'false'}
+      >
+        {view.shortLabel}
+      </button>
+    ))}
+  </div>
+  <span class="sr-only" aria-live="polite" data-view-live></span>
+</div>

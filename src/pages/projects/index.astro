@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ViewSwitcher from '@/components/ViewSwitcher.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projects } from '@/data/portfolio';
+---
+
+<BaseLayout
+  page="projects"
+  title="Projects · Yuyeon Kim"
+  description="Case studies across medical AI, data science, computer vision, robotics, 3D data, and semiconductor process optimization."
+>
+  <PageHero
+    index="01"
+    eyebrow="Project database"
+    title="Evidence, not a list of technologies."
+    intro="Every case follows the same spine: problem, constraint, decision, implementation, result, and what changed in my next approach. Choose a recruiter view to focus the database."
+  />
+
+  <section class="switcher-band page-switcher">
+    <div class="shell"><ViewSwitcher compact /></div>
+  </section>
+
+  <section class="shell section-space project-archive">
+    <div class="archive-intro">
+      <p><span data-view-label>All experience</span> · {projects.length} case studies</p>
+      <p>Training projects are explicitly labeled and separated from deployed or published work.</p>
+    </div>
+    <div class="project-grid archive-grid">
+      {projects.map((project, index) => <ProjectCard project={project} index={index} filter />)}
+    </div>
+  </section>
+</BaseLayout>

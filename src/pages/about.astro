@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import CareerMap from '@/components/CareerMap.astro';
+import { education, semiconductorEducation, awards, certifications, skillGroups, profile } from '@/data/portfolio';
+---
+
+<BaseLayout
+  page="about"
+  title="About & Skills · Yuyeon Kim"
+  description="Education, evidence-linked technical skills, awards, certifications, and career map."
+>
+  <PageHero
+    index="04"
+    eyebrow="About"
+    title="A computer scientist who follows the data into the system."
+    intro="My strongest work sits at the boundary: model and geometry, research and software, sensor and decision, process and yield. I learn the domain deeply enough to choose a better technical question."
+  />
+
+  <section class="map-section section-space"><div class="shell"><CareerMap /></div></section>
+
+  <section class="shell section-space about-grid-section">
+    <div class="about-column">
+      <p class="eyebrow">Education</p>
+      <div class="record-list">
+        {education.map((item) => (
+          <article><span>{item.period}</span><h2>{item.institution}</h2><p class="record-title">{item.degree}</p><p>{item.detail}</p></article>
+        ))}
+      </div>
+    </div>
+    <div class="about-column">
+      <p class="eyebrow">Semiconductor learning</p>
+      <div class="record-list compact-records">
+        {semiconductorEducation.map((item) => (
+          <article><span>{item.period}</span><h2>{item.title}</h2><p class="record-title">{item.provider}</p><p>{item.detail}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="skills-section section-space">
+    <div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">Skills with evidence</p><h2>No progress bars. Every tool points to where it was used.</h2></div></div>
+      <div class="skills-grid">
+        {skillGroups.map((group, index) => (
+          <article>
+            <div class="skill-group-head"><span>{String(index + 1).padStart(2, '0')}</span><h3>{group.title}</h3></div>
+            <ul>{group.items.map((item) => <li><strong>{item.name}</strong><span>{item.evidence}</span></li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="shell section-space recognition-section">
+    <div>
+      <p class="eyebrow">Awards</p>
+      <ul class="recognition-list">{awards.map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}</ul>
+    </div>
+    <div>
+      <p class="eyebrow">Certifications</p>
+      <ul class="recognition-list">{certifications.map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="contact-band">
+    <div class="shell contact-band-inner">
+      <div><p class="eyebrow">Contact</p><h2>Let’s talk about the problem behind the metric.</h2></div>
+      <div><a class="button button--light" href={`mailto:${profile.email}`}>{profile.email}</a><a href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { publications } from '@/data/portfolio';
+---
+
+<BaseLayout
+  page="research"
+  title="Research & Publications · Yuyeon Kim"
+  description="Publications and research collaborations in medical imaging, 3D surface reconstruction, computer vision, and edge AI."
+>
+  <PageHero
+    index="02"
+    eyebrow="Research & publications"
+    title="Geometry, imaging, and models that survive scrutiny."
+    intro="My research moves between representation design, statistical validation, and engineering constraints. Publication status and authorship are stated explicitly."
+  />
+
+  <section class="shell research-page section-space">
+    <div class="publication-list">
+      {publications.map((publication, index) => (
+        <article class="publication-item">
+          <div class="publication-index">{String(index + 1).padStart(2, '0')}</div>
+          <div class="publication-year">{publication.year}</div>
+          <div class="publication-copy">
+            <div class="publication-status-row">
+              <span>{publication.status}</span>
+              <span>{publication.role}</span>
+            </div>
+            <h2>{publication.href ? <a href={publication.href} target="_blank" rel="noreferrer">{publication.title} ↗</a> : publication.title}</h2>
+            <p>{publication.venue}</p>
+            <div class="tag-list">{publication.tags.map((tag) => <span>{tag}</span>)}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <aside class="research-method">
+      <p class="eyebrow">Research method</p>
+      <h2>Three checks before a result becomes evidence.</h2>
+      <div class="method-grid">
+        <article><span>01</span><h3>Representation</h3><p>Does the chosen data structure preserve the anatomical or operational feature the question depends on?</p></article>
+        <article><span>02</span><h3>Failure modes</h3><p>Do geometry, topology, error cases, and excluded samples reveal where the method stops being trustworthy?</p></article>
+        <article><span>03</span><h3>Downstream value</h3><p>Does the improvement change a scientific conclusion, operating decision, or resource requirement?</p></article>
+      </div>
+    </aside>
+  </section>
+</BaseLayout>

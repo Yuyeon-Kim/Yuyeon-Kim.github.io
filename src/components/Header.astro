@@ -1,0 +1,43 @@
+---
+import { profile } from '@/data/portfolio';
+
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+const nav = [
+  { key: 'projects', label: 'Projects', href: '/projects/' },
+  { key: 'research', label: 'Research', href: '/research/' },
+  { key: 'experience', label: 'Experience', href: '/experience/' },
+  { key: 'about', label: 'About', href: '/about/' },
+  { key: 'resume', label: 'Resume', href: '/resume/' },
+];
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="/" data-preserve-view aria-label={`${profile.name}, home`}>
+      <span class="brand-mark" aria-hidden="true">YK</span>
+      <span class="brand-name">{profile.name}</span>
+    </a>
+
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
+      <span class="sr-only">Toggle navigation</span>
+      <span></span><span></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" data-mobile-menu aria-label="Primary navigation">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          data-preserve-view
+          aria-current={currentPage === item.key ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a class="nav-github" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </div>
+</header>

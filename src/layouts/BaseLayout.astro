@@ -1,0 +1,133 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  page?: string;
+}
+
+const {
+  title = 'Yuyeon Kim · AI Researcher & ML Engineer',
+  description = 'Portfolio of Yuyeon Kim: medical AI, data science, computer vision, robotics, and semiconductor process optimization.',
+  page = '',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b1220" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body data-page={page}>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header currentPage={page} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      const validViews = ['all', 'research', 'data', 'semiconductor', 'robotics'];
+
+      function currentView() {
+        const view = new URLSearchParams(window.location.search).get('view') || 'all';
+        return validViews.includes(view) ? view : 'all';
+      }
+
+      function updateInternalLinks(view) {
+        document.querySelectorAll('a[data-preserve-view]').forEach((link) => {
+          const url = new URL(link.getAttribute('href'), window.location.origin);
+          if (view === 'all') url.searchParams.delete('view');
+          else url.searchParams.set('view', view);
+          link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+        });
+      }
+
+      function applyView(view, announce = false) {
+        document.documentElement.dataset.view = view;
+        document.querySelectorAll('[data-view-option]').forEach((button) => {
+          const active = button.dataset.viewOption === view;
+          button.setAttribute('aria-pressed', String(active));
+          button.classList.toggle('is-active', active);
+        });
+
+        document.querySelectorAll('[data-views]').forEach((item) => {
+          const options = (item.dataset.views || '').split(' ');
+          const match = view === 'all' || options.includes(view) || options.includes('all');
+          item.classList.toggle('view-match', match);
+          item.classList.toggle('view-muted', !match);
+          if (item.hasAttribute('data-filter-item')) item.hidden = !match;
+        });
+
+        document.querySelectorAll('[data-view-label]').forEach((label) => {
+          const active = document.querySelector(`[data-view-option="${view}"]`);
+          label.textContent = active?.dataset.viewName || 'All experience';
+        });
+
+        updateInternalLinks(view);
+        if (announce) {
+          const live = document.querySelector('[data-view-live]');
+          if (live) live.textContent = `Portfolio view changed to ${document.querySelector(`[data-view-option="${view}"]`)?.dataset.viewName || 'All experience'}.`;
+        }
+      }
+
+      document.querySelectorAll('[data-view-option]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const view = button.dataset.viewOption;
+          const url = new URL(window.location.href);
+          if (view === 'all') url.searchParams.delete('view');
+          else url.searchParams.set('view', view);
+          history.replaceState({}, '', url);
+          applyView(view, true);
+        });
+      });
+
+      const menuButton = document.querySelector('[data-menu-button]');
+      const menu = document.querySelector('[data-mobile-menu]');
+      menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!open));
+        menu?.classList.toggle('is-open', !open);
+      });
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        document.querySelectorAll('[data-count]').forEach((element) => {
+          const target = Number(element.dataset.count);
+          const decimals = String(target).includes('.') ? 2 : 0;
+          const prefix = element.dataset.prefix || '';
+          const suffix = element.dataset.suffix || '';
+          const direction = element.dataset.direction || '';
+          const start = performance.now();
+          const duration = 800;
+          const frame = (time) => {
+            const progress = Math.min((time - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = target * eased;
+            element.textContent = `${prefix}${value.toFixed(decimals)}${suffix}${direction ? ` ${direction}` : ''}`;
+            if (progress < 1) requestAnimationFrame(frame);
+          };
+          requestAnimationFrame(frame);
+        });
+      }
+
+      applyView(currentView());
+      window.addEventListener('popstate', () => applyView(currentView()));
+    </script>
+  </body>
+</html>

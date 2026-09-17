@@ -1,0 +1,31 @@
+---
+import { experiences } from '@/data/portfolio';
+
+interface Props {
+  full?: boolean;
+}
+
+const { full = false } = Astro.props;
+const items = full ? experiences : experiences.slice(0, 4);
+---
+
+<div class="timeline">
+  {items.map((item, index) => (
+    <article class="timeline-item" data-views={item.views.join(' ')} data-filter-item={full ? '' : undefined}>
+      <div class="timeline-marker" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
+      <p class="timeline-period">{item.period}</p>
+      <div class="timeline-content">
+        <div class="timeline-title-row">
+          <div>
+            <h3>{item.organization}</h3>
+            <p>{item.role}</p>
+          </div>
+          <span class="type-chip">{item.type}</span>
+        </div>
+        <ul>
+          {item.highlights.map((highlight) => <li>{highlight}</li>)}
+        </ul>
+      </div>
+    </article>
+  ))}
+</div>

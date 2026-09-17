@@ -1,0 +1,87 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { profile, education, experiences, publications, awards, certifications, skillGroups } from '@/data/portfolio';
+---
+
+<BaseLayout
+  page="resume"
+  title="Resume · Yuyeon Kim"
+  description="Public resume for Yuyeon Kim, AI researcher and machine learning engineer."
+>
+  <section class="resume-actions shell">
+    <a href="/" data-preserve-view>← Portfolio</a>
+    <button type="button" onclick="window.print()">Print / Save as PDF</button>
+  </section>
+
+  <article class="resume-sheet">
+    <header class="resume-header">
+      <div>
+        <p class="eyebrow">AI Researcher · ML Engineer</p>
+        <h1>{profile.name}</h1>
+        <p>{profile.summary}</p>
+      </div>
+      <address>
+        <span>{profile.location}</span>
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a href={profile.github} target="_blank" rel="noreferrer">github.com/Yuyeon-Kim</a>
+        <a href="https://yuyeon-kim.github.io">yuyeon-kim.github.io</a>
+      </address>
+    </header>
+
+    <section class="resume-section">
+      <h2>Selected outcomes</h2>
+      <div class="resume-outcomes">
+        <div><strong>32% ↓</strong><span>hippocampal sulcus error</span></div>
+        <div><strong>90% ↓</strong><span>3D mesh processing time</span></div>
+        <div><strong>99.85% ↓</strong><span>teacher-to-student model size</span></div>
+        <div><strong>CES 2024</strong><span>smart-farm AI exhibition</span></div>
+      </div>
+    </section>
+
+    <section class="resume-section resume-two-column">
+      <div>
+        <h2>Experience</h2>
+        <div class="resume-records">
+          {experiences.slice(0, 4).map((item) => (
+            <article>
+              <span>{item.period}</span>
+              <h3>{item.organization}</h3>
+              <p class="resume-role">{item.role}</p>
+              <ul>{item.highlights.slice(0, 2).map((highlight) => <li>{highlight}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside>
+        <h2>Education</h2>
+        <div class="resume-records compact">
+          {education.map((item) => <article><span>{item.period}</span><h3>{item.institution}</h3><p class="resume-role">{item.degree}</p><p>{item.detail}</p></article>)}
+        </div>
+        <h2>Recognition</h2>
+        <ul class="resume-simple-list">
+          {awards.slice(0, 4).map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="resume-section">
+      <h2>Publications</h2>
+      <ol class="resume-publications">
+        {publications.map((publication) => (
+          <li><span>{publication.year}</span><div><strong>{publication.title}</strong><p>{publication.venue} · {publication.role} · {publication.status}</p></div></li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="resume-section resume-two-column skills-resume-grid">
+      <div>
+        <h2>Technical evidence</h2>
+        {skillGroups.map((group) => <p class="resume-skill-line"><strong>{group.title}</strong><span>{group.items.map((item) => item.name).join(' · ')}</span></p>)}
+      </div>
+      <aside>
+        <h2>Selected credentials</h2>
+        <ul class="resume-simple-list">{certifications.slice(0, 5).map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}</ul>
+      </aside>
+    </section>
+  </article>
+</BaseLayout>

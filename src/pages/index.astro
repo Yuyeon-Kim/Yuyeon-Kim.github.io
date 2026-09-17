@@ -1,0 +1,118 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ViewSwitcher from '@/components/ViewSwitcher.astro';
+import MetricStrip from '@/components/MetricStrip.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import CareerMap from '@/components/CareerMap.astro';
+import ExperienceTimeline from '@/components/ExperienceTimeline.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { profile, projects, publications } from '@/data/portfolio';
+
+const featured = projects.filter((project) => project.featured);
+---
+
+<BaseLayout page="home">
+  <section class="hero shell">
+    <div class="hero-copy">
+      <p class="hero-kicker"><span></span> AI research · data · engineered systems</p>
+      <h1>{profile.name}</h1>
+      <p class="hero-role">{profile.role}</p>
+      <p class="hero-tagline">{profile.tagline}</p>
+      <p class="hero-summary">{profile.summary}</p>
+      <div class="hero-actions">
+        <a class="button button--primary" href="/projects/" data-preserve-view>Explore projects <span aria-hidden="true">↗</span></a>
+        <a class="button button--quiet" href={`mailto:${profile.email}`}>Contact</a>
+      </div>
+    </div>
+
+    <aside class="hero-evidence" aria-label="Portfolio evidence">
+      <div class="evidence-header">
+        <span>Selected evidence</span>
+        <span>2021—2026</span>
+      </div>
+      <div class="evidence-main">
+        <span class="evidence-number">32</span>
+        <div>
+          <strong>% lower sulcus error</strong>
+          <p>while preserving topology and correspondence</p>
+        </div>
+      </div>
+      <div class="evidence-rows">
+        <div><strong>90%</strong><span>faster 3D meshing</span></div>
+        <div><strong>99.85%</strong><span>smaller teacher-to-student model</span></div>
+        <div><strong>4</strong><span>field and industry collaborations</span></div>
+      </div>
+      <div class="evidence-footer">
+        <span>MICCAI · KCC · ACK · CES</span>
+        <span class="pulse-dot" aria-hidden="true"></span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="switcher-band">
+    <div class="shell"><ViewSwitcher /></div>
+  </section>
+
+  <section class="metrics-section shell section-space">
+    <div class="section-heading compact-heading">
+      <div>
+        <p class="eyebrow">Measured outcomes</p>
+        <h2>Start with the result.</h2>
+      </div>
+      <p class="section-note">Each number links to the reasoning, implementation, and validation behind it.</p>
+    </div>
+    <MetricStrip />
+  </section>
+
+  <section class="projects-section shell section-space">
+    <SectionHeading
+      eyebrow="Selected work"
+      title="Problems made smaller, faster, or more measurable."
+      intro="The portfolio view changes what appears first; the underlying evidence stays the same."
+      href="/projects/"
+      linkLabel="All projects"
+    />
+    <div class="project-grid home-project-grid">
+      {featured.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  </section>
+
+  <section class="map-section section-space">
+    <div class="shell">
+      <CareerMap />
+    </div>
+  </section>
+
+  <section class="experience-section shell section-space">
+    <SectionHeading
+      eyebrow="Experience"
+      title="Research depth, field constraints, and delivery."
+      intro="A focused timeline here; the full career archive includes research, industry collaboration, teaching, and early operations work."
+      href="/experience/"
+      linkLabel="Full timeline"
+    />
+    <ExperienceTimeline />
+  </section>
+
+  <section class="research-rail section-space">
+    <div class="shell research-rail-inner">
+      <div class="research-rail-copy">
+        <p class="eyebrow">Research record</p>
+        <h2>{publications.length} papers and active manuscripts across geometry, vision, and neuroimaging.</h2>
+        <p>First-author MICCAI work, co-first collaborative studies, and engineering research that connects algorithms to operating constraints.</p>
+        <a class="button button--light" href="/research/" data-preserve-view>View publications <span aria-hidden="true">↗</span></a>
+      </div>
+      <ol class="research-rail-list">
+        {publications.slice(0, 3).map((publication, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <strong>{publication.title}</strong>
+              <p>{publication.venue} · {publication.role}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

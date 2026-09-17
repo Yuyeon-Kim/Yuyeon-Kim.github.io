@@ -1,0 +1,45 @@
+---
+import type { Project } from '@/data/portfolio';
+
+interface Props {
+  project: Project;
+  index?: number;
+  filter?: boolean;
+}
+
+const { project, index = 0, filter = false } = Astro.props;
+---
+
+<article
+  class:list={['project-card', { 'project-card--visual': project.image }]}
+  data-views={project.views.join(' ')}
+  data-filter-item={filter ? '' : undefined}
+  style={`--card-index:${index}`}
+>
+  {project.image && (
+    <div class="project-card-image">
+      <img src={project.image} alt={project.imageAlt || ''} loading="lazy" />
+    </div>
+  )}
+  <div class="project-card-body">
+    <div class="project-card-topline">
+      <p class="eyebrow">{project.eyebrow}</p>
+      <span>{project.period}</span>
+    </div>
+    <h3><a href={`/projects/${project.slug}/`} data-preserve-view>{project.title}</a></h3>
+    <p class="project-summary">{project.summary}</p>
+    <div class="mini-metrics" aria-label="Project results">
+      {project.metrics.slice(0, 3).map((metric) => (
+        <span><strong>{metric.value}</strong> {metric.label}</span>
+      ))}
+    </div>
+    <div class="project-card-footer">
+      <div class="tag-list" aria-label="Technologies">
+        {project.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}
+      </div>
+      <a class="project-arrow" href={`/projects/${project.slug}/`} data-preserve-view aria-label={`View ${project.title}`}>
+        <span>Case study</span><b aria-hidden="true">↗</b>
+      </a>
+    </div>
+  </div>
+</article>
