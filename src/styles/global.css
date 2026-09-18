@@ -478,8 +478,13 @@ a {
   padding-block: 20px;
 }
 
+.view-switcher-label {
+  display: grid;
+  gap: 3px;
+}
+
 .view-switcher-label .eyebrow {
-  margin-bottom: 3px;
+  margin-bottom: 0;
 }
 
 .view-switcher-label strong {

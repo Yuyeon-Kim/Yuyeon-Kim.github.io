@@ -68,10 +68,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
         document.querySelectorAll('[data-views]').forEach((item) => {
           const options = (item.dataset.views || '').split(' ');
-          const match = view === 'all' || options.includes(view) || options.includes('all');
+          const match = view === 'all' || options.includes(view);
           item.classList.toggle('view-match', match);
           item.classList.toggle('view-muted', !match);
           if (item.hasAttribute('data-filter-item')) item.hidden = !match;
+        });
+
+        const visibleFilterItems = [...document.querySelectorAll('[data-filter-item]')]
+          .filter((item) => !item.hidden).length;
+        document.querySelectorAll('[data-view-count]').forEach((count) => {
+          count.textContent = String(visibleFilterItems);
         });
 
         document.querySelectorAll('[data-view-label]').forEach((label) => {
@@ -82,7 +88,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         updateInternalLinks(view);
         if (announce) {
           const live = document.querySelector('[data-view-live]');
-          if (live) live.textContent = `Portfolio view changed to ${document.querySelector(`[data-view-option="${view}"]`)?.dataset.viewName || 'All experience'}.`;
+          if (live) {
+            const viewName = document.querySelector(`[data-view-option="${view}"]`)?.dataset.viewName || 'All experience';
+            const countText = visibleFilterItems > 0 ? ` ${visibleFilterItems} matching items shown.` : '';
+            live.textContent = `Portfolio view changed to ${viewName}.${countText}`;
+          }
         }
       }
 
