@@ -21,7 +21,7 @@ const featured = projects.filter((project) => project.featured);
       <p class="hero-summary">{profile.summary}</p>
       <div class="hero-actions">
         <a class="button button--primary" href="/projects/" data-preserve-view>Explore projects <span aria-hidden="true">↗</span></a>
-        <a class="button button--quiet" href={`mailto:${profile.email}`}>Contact</a>
+        <a class="button button--quiet" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
     </div>
 

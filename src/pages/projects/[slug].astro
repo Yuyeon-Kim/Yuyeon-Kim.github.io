@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const displayDate = (date: string) => date.replaceAll('-', '.');
 const related = projects
   .filter((candidate) => candidate.slug !== project.slug && candidate.views.some((view) => project.views.includes(view)))
   .slice(0, 2);
@@ -30,7 +31,8 @@ const related = projects
         <h1>{project.title}</h1>
         <p class="case-deck">{project.summary}</p>
         <div class="case-meta">
-          <span><b>Period</b>{project.period}</span>
+          <span><b>Start date</b><time datetime={project.startDate}>{displayDate(project.startDate)}</time></span>
+          <span><b>End date</b><time datetime={project.endDate}>{displayDate(project.endDate)}</time></span>
           <span><b>Context</b>{project.organization}</span>
         </div>
       </div>

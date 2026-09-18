@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Conceptual deformation-based brain tumor analysis</title>
+  <desc id="desc">A conceptual MRI registration workflow showing a local deformation cue around a highlighted tumor region.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#050b14"/>
+      <stop offset="1" stop-color="#162c51"/>
+    </linearGradient>
+    <radialGradient id="slice" cx="48%" cy="46%" r="54%">
+      <stop offset="0" stop-color="#e5ebf5"/>
+      <stop offset="0.55" stop-color="#8493aa"/>
+      <stop offset="1" stop-color="#2b374b"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#55d7ff"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="80" y="88" fill="#8facff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="3">MEDICAL IMAGING · CONCEPTUAL WORKFLOW</text>
+  <text x="80" y="154" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">Deformation fields as tumor cues</text>
+
+  <g transform="translate(100 230)">
+    <rect width="510" height="530" rx="36" fill="#0b1728" stroke="#4e6d9f"/>
+    <text x="36" y="58" fill="#b9c8e2" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">MOVING MRI</text>
+    <ellipse cx="255" cy="286" rx="178" ry="208" fill="url(#slice)" stroke="#cdd8e8" stroke-width="4"/>
+    <ellipse cx="255" cy="286" rx="120" ry="157" fill="none" stroke="#ecf2fb" stroke-opacity="0.45" stroke-width="5"/>
+    <path d="M207 233 C238 198 282 201 308 235 C330 264 323 307 288 323 C247 341 200 316 191 278 C187 260 191 246 207 233 Z" fill="#1c293a" opacity="0.78"/>
+    <path d="M357 220 C389 229 407 254 402 284 C397 311 376 329 348 328 C320 327 302 307 304 278 C307 247 327 222 357 220 Z" fill="#e64f8c" opacity="0.78" filter="url(#glow)"/>
+    <text x="36" y="491" fill="#8295b4" font-family="Arial, Helvetica, sans-serif" font-size="20">Structural volume</text>
+  </g>
+
+  <g stroke="#55d7ff" stroke-width="5" marker-end="url(#arrow)" opacity="0.9">
+    <path d="M650 405 H770"/>
+    <path d="M650 455 H770"/>
+    <path d="M650 505 H770"/>
+  </g>
+  <text x="666" y="365" fill="#55d7ff" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">UNSUPERVISED</text>
+  <text x="682" y="395" fill="#55d7ff" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">REGISTRATION</text>
+
+  <g transform="translate(820 230)">
+    <rect width="680" height="530" rx="36" fill="#0b1728" stroke="#4e6d9f"/>
+    <text x="36" y="58" fill="#b9c8e2" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">DEFORMATION FIELD</text>
+    <ellipse cx="274" cy="286" rx="178" ry="208" fill="url(#slice)" opacity="0.84" stroke="#cdd8e8" stroke-width="4"/>
+    <ellipse cx="274" cy="286" rx="120" ry="157" fill="none" stroke="#ecf2fb" stroke-opacity="0.34" stroke-width="5"/>
+    <g stroke="#55d7ff" stroke-width="4" marker-end="url(#arrow)" opacity="0.9">
+      <path d="M336 186 Q382 166 425 185"/>
+      <path d="M353 224 Q412 215 454 247"/>
+      <path d="M354 269 Q415 285 450 323"/>
+      <path d="M335 316 Q379 350 412 382"/>
+    </g>
+    <circle cx="383" cy="270" r="62" fill="#e64f8c" fill-opacity="0.18" stroke="#e64f8c" stroke-width="5" stroke-dasharray="12 10" filter="url(#glow)"/>
+    <text x="488" y="238" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">Local expansion</text>
+    <text x="488" y="276" fill="#9fb1cf" font-family="Arial, Helvetica, sans-serif" font-size="20">Candidate signal</text>
+    <text x="488" y="306" fill="#9fb1cf" font-family="Arial, Helvetica, sans-serif" font-size="20">for validation</text>
+    <rect x="478" y="354" width="156" height="54" rx="27" fill="#213a66"/>
+    <text x="505" y="389" fill="#bcd0f3" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700">Hypothesis</text>
+    <text x="36" y="491" fill="#8295b4" font-family="Arial, Helvetica, sans-serif" font-size="20">Model behavior requires clinical validation</text>
+  </g>
+</svg>

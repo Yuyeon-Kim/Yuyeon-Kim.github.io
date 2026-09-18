@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Semiconductor process optimization results</title>
+  <desc id="desc">A wafer process visualization with confirmed Spatial ALD and LPCVD performance comparisons.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#152a4e"/>
+    </linearGradient>
+    <radialGradient id="wafer" cx="45%" cy="38%" r="62%">
+      <stop offset="0" stop-color="#eff6ff"/>
+      <stop offset="0.65" stop-color="#9ebcff"/>
+      <stop offset="1" stop-color="#315efb"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#020617" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g fill="#9fb8e8" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="3">
+    <text x="84" y="84">MANUFACTURING AI</text>
+  </g>
+  <text x="84" y="145" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Process optimization under constraints</text>
+
+  <g transform="translate(70 215)" filter="url(#shadow)">
+    <rect width="640" height="590" rx="34" fill="#0c1b32" stroke="#315efb" stroke-opacity="0.55"/>
+    <text x="44" y="62" fill="#d9e5ff" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">SPATIAL ALD · CONFIRMATION RUN</text>
+    <circle cx="305" cy="300" r="190" fill="url(#wafer)" stroke="#dbe7ff" stroke-width="5"/>
+    <circle cx="305" cy="300" r="148" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="3"/>
+    <circle cx="305" cy="300" r="94" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3"/>
+    <g fill="#12d6b0" opacity="0.9">
+      <circle cx="233" cy="184" r="13"/><circle cx="353" cy="169" r="12"/><circle cx="419" cy="244" r="15"/>
+      <circle cx="191" cy="277" r="12"/><circle cx="305" cy="295" r="15"/><circle cx="385" cy="352" r="13"/>
+      <circle cx="235" cy="398" r="14"/><circle cx="329" cy="431" r="12"/>
+    </g>
+    <path d="M305 110 L317 132 L293 132 Z" fill="#0c1b32"/>
+    <text x="44" y="535" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700">154 rpm</text>
+    <text x="398" y="520" fill="#8facff" font-family="Arial, Helvetica, sans-serif" font-size="22">Throughput</text>
+    <text x="398" y="558" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="35" font-weight="700">+8.4%</text>
+  </g>
+
+  <g transform="translate(760 215)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="770" height="272" rx="30" fill="#f8fbff"/>
+    <text x="38" y="52" fill="#18243a" font-size="22" font-weight="700">ALD PROCESS RESULT</text>
+    <text x="38" y="105" fill="#50627f" font-size="20">Throughput (UPH)</text>
+    <rect x="260" y="80" width="260" height="32" rx="16" fill="#d8e2f5"/>
+    <rect x="260" y="80" width="238" height="32" rx="16" fill="#7896da"/>
+    <text x="540" y="106" fill="#50627f" font-size="22">28.12</text>
+    <rect x="260" y="128" width="282" height="32" rx="16" fill="#315efb"/>
+    <text x="560" y="154" fill="#18243a" font-size="22" font-weight="700">30.47</text>
+    <text x="38" y="211" fill="#50627f" font-size="20">Within-wafer variation</text>
+    <text x="322" y="213" fill="#7896da" font-size="30" font-weight="700">1.15%</text>
+    <path d="M430 204 H500" stroke="#9db0d3" stroke-width="3"/>
+    <path d="M486 190 L510 204 L486 218" fill="none" stroke="#9db0d3" stroke-width="3"/>
+    <text x="530" y="213" fill="#12a88b" font-size="30" font-weight="700">1.10%</text>
+
+    <rect y="310" width="770" height="280" rx="30" fill="#f8fbff"/>
+    <text x="38" y="362" fill="#18243a" font-size="22" font-weight="700">LPCVD CAPACITY TRADE-OFF</text>
+    <text x="38" y="420" fill="#50627f" font-size="20">Lots per batch</text>
+    <text x="260" y="420" fill="#7896da" font-size="34" font-weight="700">5</text>
+    <path d="M315 410 H385" stroke="#9db0d3" stroke-width="3"/>
+    <path d="M371 396 L395 410 L371 424" fill="none" stroke="#9db0d3" stroke-width="3"/>
+    <text x="425" y="420" fill="#315efb" font-size="34" font-weight="700">6</text>
+    <text x="38" y="482" fill="#50627f" font-size="20">Throughput</text>
+    <text x="260" y="482" fill="#7896da" font-size="30">25</text>
+    <text x="425" y="482" fill="#315efb" font-size="30" font-weight="700">30 UPH</text>
+    <text x="38" y="540" fill="#50627f" font-size="20">Wafer-to-wafer variation</text>
+    <text x="322" y="540" fill="#12a88b" font-size="28">0.96%</text>
+    <text x="530" y="540" fill="#e55e78" font-size="28" font-weight="700">2.86%</text>
+  </g>
+</svg>
