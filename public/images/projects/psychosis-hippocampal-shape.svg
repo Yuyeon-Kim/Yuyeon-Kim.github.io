@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Hippocampal shape across psychosis risk states</title><desc id="desc">Four aligned hippocampal surfaces with localized deformation patterns and study metrics.</desc>
+<defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f6f8fd"/><stop offset="1" stop-color="#e8eefb"/></linearGradient><linearGradient id="hip" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#496dca"/><stop offset="1" stop-color="#82a9ff"/></linearGradient></defs>
+<rect width="1600" height="900" rx="36" fill="url(#bg)"/>
+<text x="80" y="88" fill="#315efb" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="4">NEUROIMAGING · SURFACE STATISTICS</text>
+<text x="80" y="150" fill="#101b31" font-family="Arial,sans-serif" font-size="52" font-weight="800">Local shape reveals what volume averages away</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<g transform="translate(80 235)"><rect width="330" height="380" rx="26" fill="#fff"/><text x="165" y="50" fill="#18243d" font-size="22" font-weight="700">Healthy controls</text><path d="M65 205C70 110 185 75 260 120C335 166 285 295 190 315C95 335 58 272 65 205Z" fill="url(#hip)"/><path d="M120 265C155 210 210 180 280 180" fill="none" stroke="#d7e3ff" stroke-width="18" stroke-linecap="round"/></g>
+<g transform="translate(450 235)"><rect width="330" height="380" rx="26" fill="#fff"/><text x="165" y="50" fill="#18243d" font-size="22" font-weight="700">Unaffected relatives</text><path d="M65 205C70 110 185 75 260 120C335 166 285 295 190 315C95 335 58 272 65 205Z" fill="url(#hip)"/><ellipse cx="238" cy="153" rx="55" ry="38" fill="#20c4ad" opacity=".74"/></g>
+<g transform="translate(820 235)"><rect width="330" height="380" rx="26" fill="#fff"/><text x="165" y="50" fill="#18243d" font-size="22" font-weight="700">Clinical high risk</text><path d="M65 205C70 110 185 75 260 120C335 166 285 295 190 315C95 335 58 272 65 205Z" fill="url(#hip)"/><ellipse cx="225" cy="260" rx="60" ry="44" fill="#ffbe55" opacity=".82"/></g>
+<g transform="translate(1190 235)"><rect width="330" height="380" rx="26" fill="#fff"/><text x="165" y="50" fill="#18243d" font-size="22" font-weight="700">First-episode psychosis</text><path d="M65 205C70 110 185 75 260 120C335 166 285 295 190 315C95 335 58 272 65 205Z" fill="url(#hip)"/><ellipse cx="120" cy="190" rx="62" ry="48" fill="#ef5276" opacity=".88"/><text x="118" y="197" fill="#fff" font-size="18" font-weight="800">CA1</text></g>
+</g>
+<rect x="80" y="680" width="1440" height="135" rx="24" fill="#10213d"/>
+<text x="135" y="733" fill="#8facff" font-family="Arial,sans-serif" font-size="21" font-weight="700">ALIGNED, COVARIATE-AWARE COMPARISON</text>
+<text x="135" y="785" fill="#fff" font-family="Arial,sans-serif" font-size="32" font-weight="800">360 participants</text><text x="490" y="785" fill="#fff" font-family="Arial,sans-serif" font-size="32" font-weight="800">4 risk states</text><text x="790" y="785" fill="#fff" font-family="Arial,sans-serif" font-size="32" font-weight="800">Vertex-wise MANCOVA</text><text x="1220" y="785" fill="#fff" font-family="Arial,sans-serif" font-size="32" font-weight="800">Co-first author</text>
+</svg>
