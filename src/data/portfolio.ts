@@ -272,9 +272,9 @@ export const projects: Project[] = [
     tags: ["Knowledge distillation", "M-SFANet", "MCNN", "PyTorch", "Edge AI"],
     views: ["all", "research", "data"],
     featured: true,
-    image: "/images/projects/crowd-counting-workflow.svg",
+    image: "/images/projects/crowd-counting-prototype.jpg",
     imageAlt:
-      "PPT-derived workflow showing teacher-guided edge crowd counting and congestion notification.",
+      "Subway-station miniature used to demonstrate an edge crowd-counting and congestion-notification service.",
   },
   {
     slug: "semiconductor-process-optimization",
@@ -480,9 +480,9 @@ export const projects: Project[] = [
     ],
     views: ["all", "research", "data"],
     featured: false,
-    image: "/images/projects/psychosis-hippocampal-shape.svg",
+    image: "/images/projects/psychosis-hippocampal-shape.png",
     imageAlt:
-      "PPT-derived comparison of aligned hippocampal surfaces and localized deformation across psychosis risk states.",
+      "Hippocampal subregions and vertex-wise deformation maps across psychosis risk states.",
   },
   {
     slug: "maternal-depression-brain-similarity",
@@ -521,9 +521,9 @@ export const projects: Project[] = [
     ],
     views: ["all", "research", "data"],
     featured: false,
-    image: "/images/projects/maternal-brain-similarity.svg",
+    image: "/images/projects/maternal-brain-similarity.png",
     imageAlt:
-      "PPT-derived intergenerational neuroimaging framework linking maternal factors, mother-child brain similarity, and child outcomes.",
+      "Intergenerational neuroimaging workflow linking maternal depression, parenting stress, and mother-child brain similarity.",
   },
   {
     slug: "brain-tumor-deformation-analysis",
