@@ -150,7 +150,7 @@ export const projects: Project[] = [
       },
       {
         label: "POSTECH research highlight",
-        href: "https://cse.postech.ac.kr/",
+        href: "https://cse.postech.ac.kr/s.do?QwcRFOcVGw",
       },
     ],
   },
@@ -196,6 +196,12 @@ export const projects: Project[] = [
     image: "/images/mesh-pipeline.png",
     imageAlt:
       "Point-cloud comparison before and after DBSCAN-based object segmentation.",
+    links: [
+      {
+        label: "Paper",
+        href: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11488590",
+      },
+    ],
   },
   {
     slug: "smart-farm-vision-automation",
@@ -275,6 +281,12 @@ export const projects: Project[] = [
     image: "/images/projects/crowd-counting-prototype.jpg",
     imageAlt:
       "Subway-station miniature used to demonstrate an edge crowd-counting and congestion-notification service.",
+    links: [
+      {
+        label: "Paper",
+        href: "https://doi.org/10.3745/PKIPS.y2023m11a.918",
+      },
+    ],
   },
   {
     slug: "semiconductor-process-optimization",
@@ -654,6 +666,7 @@ export const publications = [
     role: "Joint first author",
     status: "Published",
     tags: ["Knowledge distillation", "Edge AI"],
+    href: "https://doi.org/10.3745/PKIPS.y2023m11a.918",
   },
   {
     year: "2023",
@@ -663,6 +676,7 @@ export const publications = [
     role: "Joint first author",
     status: "Published · 3rd prize",
     tags: ["Point cloud", "Parallel processing"],
+    href: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11488590",
   },
 ];
 
