@@ -13,9 +13,32 @@ interface Props {
 
 const { project } = Astro.props;
 const displayDate = (date: string) => date.replaceAll('-', '.');
+const currentIndex = projects.findIndex((candidate) => candidate.slug === project.slug);
+const projectViews = new Set(project.views.filter((view) => view !== 'all'));
+const projectTags = new Set(project.tags.map((tag) => tag.toLowerCase()));
+
+// Rank by meaningful overlap, then rotate ties from the current project so the
+// first projects in the data file do not dominate every recommendation.
 const related = projects
-  .filter((candidate) => candidate.slug !== project.slug && candidate.views.some((view) => project.views.includes(view)))
-  .slice(0, 2);
+  .map((candidate, index) => {
+    const sharedViews = candidate.views.filter(
+      (view) => view !== 'all' && projectViews.has(view),
+    ).length;
+    const sharedTags = candidate.tags.filter((tag) =>
+      projectTags.has(tag.toLowerCase()),
+    ).length;
+    const distance = (index - currentIndex + projects.length) % projects.length;
+
+    return {
+      project: candidate,
+      score: sharedViews * 4 + sharedTags * 2,
+      distance,
+    };
+  })
+  .filter((candidate) => candidate.project.slug !== project.slug)
+  .sort((a, b) => b.score - a.score || a.distance - b.distance)
+  .slice(0, 3)
+  .map((candidate) => candidate.project);
 ---
 
 <BaseLayout
