@@ -111,23 +111,23 @@ export const projects: Project[] = [
     endDate: "2026-08-31",
     organization: "POSTECH MIP Lab",
     summary:
-      "A topology-consistent reconstruction framework that preserves the thin hippocampal sulcus using training-time guidance and template-to-subject deformation.",
+      "Developed a topology-consistent 3D hippocampal reconstruction method that preserves the thin sulcus while maintaining vertex-wise correspondence across subjects.",
     contribution:
       "Lead author. Designed the sulcus-aware deformation framework, built the training and evaluation pipeline, performed baseline and morphometric analyses, and led manuscript and figure preparation.",
     problem:
-      "Conventional surface pipelines often erase the hippocampal sulcus through partial-volume effects and smoothing, while flexible deformation methods can introduce self-intersections or invalid topology.",
+      "The hippocampal sulcus is thinner than the 1 mm MRI grid and is easily erased by partial-volume effects and surface smoothing. Preserving it too aggressively, however, can introduce self-intersections or invalid topology.",
     difficulty:
-      "The target structure is much thinner than the 1 mm structural MRI grid, and high-resolution sulcus labels are expensive and impractical to require at inference time.",
+      "High-resolution sulcus labels are expensive to produce, so a method that also requires them at inference would be difficult to scale to routine research data.",
     firstApproach:
-      "I compared mask-derived, level-set, deformation-based, and end-to-end mesh reconstruction baselines, then measured not only whole-hippocampus agreement but also sulcus fidelity and geometric failures.",
+      "Compared mask-derived surfaces, level-set methods, deformation-based reconstruction, and end-to-end mesh prediction, evaluating sulcus fidelity and geometric failures in addition to whole-hippocampus agreement.",
     decision:
-      "Instead of predicting a free-form mesh, I anchored every subject to a sulcus-preserving template and learned a smooth diffeomorphic field, using sulcus labels only as auxiliary training signals.",
+      "Rather than predicting each mesh freely, built a sulcus-preserving fixed-topology template and learned a diffeomorphic deformation to each subject. Sulcus labels were used only as auxiliary supervision during training.",
     implementation:
-      "Built a voxel-level template, warped a fixed-topology mesh with a VoxelMorph-style deformation network, combined volume, surface, sulcus, and field-regularization losses, and validated correspondence after Procrustes alignment.",
+      "Constructed a voxel-level template and fixed-topology mesh, trained a VoxelMorph-style deformation network, combined volume, surface, sulcus, and field-regularization losses, and verified correspondence after Procrustes alignment.",
     result:
-      "Reduced sulcus boundary error from the strongest baseline’s 0.97 mm to 0.66 mm—about 32%—with zero topology mismatches and only one highly localized self-intersection case. The surfaces enabled AD–CN sulcus morphometry.",
+      "Reduced sulcus boundary error from the strongest baseline’s 0.97 mm to 0.66 mm—about 32%—with zero topology errors and only one highly localized self-intersection. The resulting surfaces enabled sulcus-adjacent morphometry in cognitively normal and Alzheimer’s disease cohorts. The work was accepted to MICCAI 2026 as a first-author paper.",
     learned:
-      "A model is useful only when its representation preserves the feature that matters downstream. I now define evaluation around the scientific decision, not only the global benchmark score.",
+      "Evaluation should be designed around the anatomical feature required by the downstream clinical analysis, not only a global surface score.",
     metrics: [
       { value: "32% ↓", label: "sulcus error" },
       { value: "0", label: "topology errors" },
@@ -166,23 +166,23 @@ export const projects: Project[] = [
     endDate: "2023-06-20",
     organization: "Dongguk University × VESTELLALAB",
     summary:
-      "Reframed a 38-million-point bottleneck as independent object-level work, then parallelized meshing under ordinary workstation memory constraints.",
+      "Segmented a 38-million-point indoor parking-garage scan into object-level jobs and parallelized meshing, reducing generation time by about 90%.",
     contribution:
       "Project lead and co-first author. Designed the object-wise processing pipeline, implemented parallel meshing and thread benchmarks, applied SECOND vehicle detection, and integrated Unity visualization.",
     problem:
-      "Meshing an entire parking-garage point cloud at once caused processing time and memory use to grow beyond what a standard office workstation could handle.",
+      "Meshing the entire point cloud at once caused processing time and memory use to grow beyond what a standard office workstation could handle.",
     difficulty:
-      "Simply moving the same workload to stronger hardware would not remove the structural bottleneck, and the scene contained both static infrastructure and moving objects.",
+      "Stronger hardware would not remove the structural bottleneck, and static infrastructure and vehicles required different processing strategies.",
     firstApproach:
-      "I compared whole-scene processing, sequential object processing, and parallel object processing while measuring both elapsed time and memory use.",
+      "Compared whole-scene processing, sequential object processing, and parallel object processing while measuring elapsed time, memory use, and performance by thread count.",
     decision:
-      "I chose DBSCAN-based static-object segmentation so each object could be meshed independently, then reserved learned detection for vehicles that were better represented by reusable models.",
+      "Used DBSCAN to separate static objects into independent meshing jobs, while handling vehicles with SECOND-based 3D detection so reusable objects did not need to be remeshed.",
     implementation:
-      "Segmented the point cloud with DBSCAN, ran object-wise meshing in parallel, benchmarked elapsed time by thread count, detected cars with SECOND, and integrated the result into a Unity visualization pipeline.",
+      "Implemented DBSCAN clustering, point interpolation, object-wise parallel meshing, thread benchmarks, SECOND vehicle detection, and integration with a Unity visualization pipeline.",
     result:
-      "Cut mesh generation time by about 90%, retained operability in constrained memory, published at KCC 2023, and received 3rd prize in the undergraduate/junior paper competition.",
+      "Reduced mesh generation time by about 90% and kept the pipeline operable under limited memory. The work was published at KCC 2023 as a co-first-author paper and received 3rd prize in the undergraduate/junior paper competition.",
     learned:
-      "Before optimizing an algorithm, I look for a better unit of work. Changing the processing boundary can remove more cost than tuning the original pipeline.",
+      "Redefining the unit of work can remove more cost than fine-tuning an algorithm inside the original processing structure.",
     metrics: [
       { value: "90% ↓", label: "mesh time" },
       { value: "38M", label: "points" },
@@ -217,23 +217,23 @@ export const projects: Project[] = [
     endDate: "2024-03-31",
     organization: "KIST Intelligent Robotics",
     summary:
-      "Improved plant-growth measurement models and delivered them as maintainable desktop software for repeated use in an automated farm.",
+      "Improved a computer-vision pipeline that detects plant stems and branch points, measures stem diameter, and delivers the results through a field-ready GUI.",
     contribution:
       "Improved SAM/YOLOR segmentation and EfficientNet keypoint detection, redesigned stem-diameter measurement, and refactored the PyQt5 application for repeated research use.",
     problem:
-      "Plant stem diameter and branching points were measured manually, creating repetitive work and inconsistent results across images and operators.",
+      "Researchers repeatedly measured stem diameter and branch points by hand, creating time-consuming work and inconsistent results across images and operators.",
     difficulty:
-      "The solution had to improve model quality, produce geometrically meaningful measurements, and remain usable by researchers outside the AI codebase.",
+      "The project had to improve model accuracy, correct geometric measurement error from tilted stems, and remain maintainable for researchers outside the AI codebase.",
     firstApproach:
-      "I evaluated the existing detection and measurement pipeline separately to distinguish model errors from geometry and software-architecture errors.",
+      "Separated the existing workflow into detection, geometric measurement, and GUI layers to identify whether each error came from the model, the measurement rule, or the software structure.",
     decision:
-      "I combined SAM/YOLOR segmentation, EfficientNet point detection, and least-squares diameter fitting, then refactored the desktop application around reusable strategy and singleton patterns.",
+      "Combined SAM/YOLOR stem segmentation, EfficientNet branch-point detection, and least-squares diameter fitting, then reorganized the application with Strategy and Singleton patterns.",
     implementation:
-      "Trained and evaluated the vision models, corrected tilt during stem measurement, implemented a PyQt5 GUI, and connected the pipeline to the automation workflow.",
+      "Trained and evaluated the vision models, implemented tilt-aware stem-diameter measurement, developed and refactored the PyQt5 GUI, and connected the pipeline to the farm automation workflow.",
     result:
-      "Improved stem segmentation by 5%, branch-point detection by 10%, and diameter RMSE by 22.54%. The system was exhibited at CES 2024 and connected to patent and paper preparation.",
+      "Improved stem segmentation by about 5%, branch-point detection by about 10%, and diameter-measurement RMSE by 22.54%. The system was exhibited at CES 2024 and supported patent and paper preparation.",
     learned:
-      "A research metric becomes valuable only after the model, measurement algorithm, and operator workflow agree on the same output.",
+      "A field AI system becomes useful only when the model, measurement algorithm, and operator interface produce and interpret the same output consistently.",
     metrics: [
       { value: "+5%", label: "segmentation" },
       { value: "+10%", label: "point detection" },
@@ -262,23 +262,23 @@ export const projects: Project[] = [
     endDate: "2023-12-07",
     organization: "HanIeum ICT Mentoring",
     summary:
-      "Built a subway-congestion prototype around a compact student model so crowd counts could be estimated near the camera instead of transmitting full video.",
+      "Compressed a crowd-counting model so subway congestion could be estimated on an edge device instead of transmitting multiple full video streams to a central server.",
     contribution:
       "Co-first author and presenter. Selected the teacher–student pair, designed the distillation loss and training schedule, ran alpha experiments, and helped build the demonstration software.",
     problem:
-      "A subway congestion service needed useful count accuracy without sending multiple high-bandwidth camera streams to a central server.",
+      "Streaming several camera feeds would create substantial network cost, but the accurate crowd-counting model was too large to run efficiently at the edge.",
     difficulty:
-      "The teacher model was accurate but 366.6 MB, while the 0.532 MB MCNN student was deployable but had substantially higher error.",
+      "The 366.6 MB teacher was accurate, while the deployable 0.532 MB MCNN student had a much higher MAE of 110.2.",
     firstApproach:
-      "The team reviewed 17 crowd-counting architectures and compared accuracy, output format, parameter count, and edge suitability before choosing the teacher and student.",
+      "Reviewed 17 crowd-counting architectures and compared accuracy, output representation, parameter count, and suitability for an embedded deployment.",
     decision:
-      "I used M-SFANet as teacher and MCNN as student, combining ground-truth and teacher-output losses and tuning the distillation weight without an unnecessary softmax temperature.",
+      "Selected M-SFANet as teacher and MCNN as student, combining ground-truth and distillation losses. Because the task regressed density maps, the training omitted an unnecessary softmax temperature.",
     implementation:
-      "Designed the two-stage training procedure, applied cosine-annealing warm restarts, compared alpha values with MAE and RMSE on ShanghaiTech Part A, and demonstrated the service with a subway-station miniature.",
+      "Built a two-stage training pipeline, applied cosine-annealing warm restarts, and compared distillation weights using MAE and RMSE on ShanghaiTech Part A.",
     result:
-      "Kept the model at 0.543 MB—99.85% smaller than the teacher—while improving MCNN MAE from 110.2 to 90.86, a 17.55% improvement. Published at ACK 2023 and won an ICT mentoring award.",
+      "Kept the student at 0.543 MB—99.85% smaller than the teacher—while reducing MCNN MAE from 110.2 to 90.86, a 17.55% improvement. The work was presented at ACK 2023 as a co-first-author paper and received an ICT Mentoring encouragement award.",
     learned:
-      "Compression is a cost–performance decision. The right model is not the largest one; it is the smallest model that clears the operating requirement.",
+      "Model compression is a cost–performance decision: the target is the smallest model that still satisfies the operating requirement.",
     metrics: [
       { value: "99.85% ↓", label: "model size" },
       { value: "17.55%", label: "MAE improvement" },
@@ -306,23 +306,23 @@ export const projects: Project[] = [
     endDate: "2026-08-26",
     organization: "Semicon Bootcamp",
     summary:
-      "Used DOE, interpretable ML, and constrained search to examine the trade-off among within-wafer uniformity, throughput, and lot-to-lot variation.",
+      "Used DOE, machine learning, SHAP, and constrained search to analyze the trade-off between deposition-process variation and throughput.",
     contribution:
       "Analyzed the DOE datasets, compared ML models, interpreted SHAP results, searched constrained operating conditions, and evaluated confirmation experiments.",
     problem:
-      "Process engineers must improve productivity without allowing uniformity or between-wafer variation to move outside a controllable margin.",
+      "The process condition had to raise productivity without pushing within-wafer or wafer-to-wafer variation outside an acceptable range.",
     difficulty:
-      "The objective was multi-criteria: faster rotation or larger batches increased throughput, but could degrade WiW or W2W variation.",
+      "Higher rotation speed or batch size could improve throughput while worsening WiW or W2W variation, so no single metric could define the best setting.",
     firstApproach:
-      "I analyzed correlations and regression behavior, compared linear regression, random forest, and gradient boosting, and checked performance with R², RMSE, and cross-validation.",
+      "Analyzed correlations in the DOE data, compared Linear Regression, Random Forest, and Gradient Boosting, and evaluated R², RMSE, and cross-validation performance.",
     decision:
-      "I treated the model as a proposal generator rather than ground truth, used SHAP to inspect influential variables, and required a confirmation experiment before accepting the candidate condition.",
+      "Used the model to generate candidate conditions rather than treating predictions as ground truth, inspected influential variables with SHAP, and accepted a condition only after a confirmation experiment.",
     implementation:
-      "Built a Python workflow for DOE data, ML prediction, differential-evolution search, constraint filtering, and natural-language experiment recommendations.",
+      "Built a Python workflow for data analysis, model training, SHAP interpretation, differential-evolution search, constraint filtering, and experiment recommendation.",
     result:
-      "In the Spatial ALD exercise, the confirmed condition improved throughput by 8.4% while lowering WiW variation from 1.15% to 1.10%. In LPCVD, a 5-to-6-lot change increased UPH 20% but exposed a W2W trade-off (0.96% to 2.86%).",
+      "In the Spatial ALD exercise, raised UPH from 28.12 to 30.47—an 8.4% increase—while the confirmation experiment reduced WiW variation from 1.15% to 1.10%. In LPCVD, changing from five to six lots increased UPH by 20% but exposed a W2W trade-off from 0.96% to 2.86%.",
     learned:
-      "Optimization is not choosing the largest predicted gain. It is defining guardrails, exposing trade-offs, and testing the smallest experiment that can disprove the recommendation.",
+      "Process optimization is not selecting the largest predicted gain; it requires defining quality guardrails first and validating the recommendation with the smallest useful experiment.",
     metrics: [
       { value: "+8.4%", label: "ALD throughput" },
       { value: "1.10%", label: "confirmed WiW" },
@@ -351,23 +351,23 @@ export const projects: Project[] = [
     endDate: "2026-04-30",
     organization: "Industry Partner × POSTECH",
     summary:
-      "Built a KNN-based similarity-search and error-analysis framework for a large-scale data workflow.",
+      "Developed a KNN-based framework that retrieves comparable records and connects similarity results to structured success and failure analysis.",
     contribution:
       "Developed the KNN similarity-search pipeline, organized failure cases, tuned parameters, and documented results for cross-team review.",
     problem:
-      "The project needed a reproducible way to retrieve comparable records and explain why individual candidates succeeded or failed beyond a single aggregate score.",
+      "An aggregate score could not explain why individual candidates succeeded or failed, so comparable-case retrieval had to be linked with error analysis.",
     difficulty:
-      "Similarity quality shifted with feature and parameter choices, while a top-line score hid distinct error modes and made targeted improvement difficult.",
+      "Neighbor quality changed with feature and parameter choices, while distinct failure modes could disappear inside a single top-line metric.",
     firstApproach:
-      "I inspected nearest-neighbor outputs, categorized representative failure cases, and compared parameter settings with a consistent evaluation protocol.",
+      "Reviewed nearest-neighbor outputs, grouped recurring failure cases, and compared parameter settings under a consistent evaluation protocol.",
     decision:
-      "I separated retrieval quality from error type instead of collapsing both into one metric, then used representative failures for targeted review and iteration.",
+      "Kept retrieval quality and error type as separate signals, then reviewed representative failures alongside the similarity results.",
     implementation:
-      "Developed the KNN retrieval pipeline, evaluation summaries, error-case taxonomy, and parameter-tuning workflow, with documentation that made each change traceable.",
+      "Built the KNN retrieval pipeline, evaluation summaries, error taxonomy, and parameter-tuning workflow, documenting each change for traceable cross-team review.",
     result:
-      "Established a repeatable analysis framework that connected similarity quality to classified error cases and made parameter changes easier to review.",
+      "Established a repeatable framework for connecting similarity quality to classified error cases and reviewing the effect of parameter changes.",
     learned:
-      "A useful data-science result must make the next decision easier. Error structure often provides more leverage than another aggregate score.",
+      "The value of an analysis is not only a higher score; it is whether the result makes the next experiment and decision clearer.",
     metrics: [
       { value: "KNN", label: "retrieval framework" },
       { value: "3-step", label: "retrieve · review · tune" },
@@ -394,23 +394,23 @@ export const projects: Project[] = [
     endDate: "2023-08-31",
     organization: "Dongguk ATRC × KORAIL",
     summary:
-      "Developed ROS2 LiDAR algorithms for detecting obstacles, missing ballast, subsidence, and flooding on an autonomous railway inspection robot.",
+      "Developed LiDAR algorithms for detecting obstacles, missing ballast, ground subsidence, and flooding on an autonomous railway inspection robot.",
     contribution:
       "Developed four LiDAR anomaly-detection modules in C++/Python and integrated them into a ROS2-based railway inspection robot; also fixed a Virtual LiDAR packet bug in Unity C#.",
     problem:
-      "Rail inspection required repeatable detection of several infrastructure hazards from a moving robot under real sensor and operating constraints.",
+      "A moving robot had to identify several physically different railway hazards repeatedly and reliably from real LiDAR data.",
     difficulty:
-      "The system had to coordinate sensor acquisition, spatial rules, robot middleware, and field-specific thresholds rather than stop at an offline model demo.",
+      "Success depended not only on offline detection but also on packet reception, coordinate frames, ROS communication, sensor delay, and field-specific thresholds.",
     firstApproach:
-      "I traced the complete LiDAR data path and validated each hazard detector against the physical definition of the railway defect.",
+      "Traced the full data path from LiDAR packet reception to ROS node output and validated each detector against the physical definition of its target hazard.",
     decision:
-      "I used explicit geometric and point-cloud processing where it was interpretable and reliable, integrating the algorithms through ROS2 instead of forcing every case into a learned model.",
+      "Used interpretable geometric point-cloud processing for safety-critical conditions and connected each capability as an independent ROS2 node.",
     implementation:
-      "Implemented C++/Python LiDAR processing nodes in ROS2 Foxy and debugged a separate Virtual LiDAR packet-structure issue in Unity C# for an ADD collaboration.",
+      "Implemented obstacle, missing-ballast, subsidence, and flooding detection in C++ and Python on ROS2 Foxy. In a separate defense collaboration, also corrected a Virtual LiDAR packet-structure bug in Unity C#.",
     result:
-      "The inspection algorithms were integrated into the robot, exhibited at LITT, and connected to commercialization.",
+      "The detection modules were integrated into the inspection robot, exhibited at LITT 2024, and connected to commercialization.",
     learned:
-      "Robotics rewards end-to-end accountability: an accurate algorithm still fails if timestamps, packets, frames, or operating assumptions are wrong.",
+      "In robotics, algorithm accuracy is inseparable from packet structure, timing, coordinate frames, and the assumptions of the operating environment.",
     metrics: [
       { value: "4", label: "hazard types" },
       { value: "ROS2", label: "platform integration" },
@@ -432,23 +432,23 @@ export const projects: Project[] = [
     endDate: "2023-02-01",
     organization: "Dongguk University × NeuroCircuit",
     summary:
-      "Reduced spurious skin-tone and lighting variation before ensemble classification of four alopecia-severity levels.",
+      "Developed color-normalization preprocessing for a limited scalp-microscope dataset and improved four-level alopecia-severity classification.",
     contribution:
       "Developed color normalization and targeted augmentation, ran CNN ensemble experiments, and contributed to the paper’s experimental analysis and writing.",
     problem:
-      "A limited microscope-image dataset contained large color shifts from lighting and skin tone that could dominate the medically relevant pattern.",
+      "Large color shifts caused by lighting and skin tone could dominate medically relevant scalp patterns and lead the model to learn nuisance features.",
     difficulty:
-      "Collecting a much larger balanced dataset was not immediately possible, so the preprocessing had to improve invariance without erasing scalp features.",
+      "Collecting a much larger balanced dataset was not immediately feasible, so preprocessing had to reduce color variation without removing lesion and hair information.",
     firstApproach:
-      "I grouped representative red, yellow, peach, green, and blue cases and inspected where simple tone normalization failed.",
+      "Grouped representative red, yellow, peach, green, and blue cases and analyzed where simple tone normalization failed.",
     decision:
-      "I normalized color against a reference, added controlled red-channel augmentation for failure cases, and evaluated complementary CNN backbones.",
+      "Applied reference color normalization with targeted red-channel and PCA augmentation, then combined predictions from complementary CNN backbones.",
     implementation:
-      "Built color normalization and PCA augmentation code, then ensembled DenseNet, Xception, and ResNet predictions.",
+      "Developed the color-normalization and augmentation code and trained an ensemble of DenseNet, XceptionNet, and ResNet models.",
     result:
-      "Improved F1 by about 12 percentage points and achieved 95.84% accuracy. The work was published in Electronics and selected as an Editor’s Choice article.",
+      "Improved F1 by about 12 percentage points and achieved 95.84% accuracy. The study was published in Electronics and selected as an Editor’s Choice article.",
     learned:
-      "When data are scarce, carefully defined nuisance variation and targeted preprocessing can be more effective than blindly increasing model capacity.",
+      "With limited data, precisely defining and correcting nuisance variation can be more effective than simply increasing model capacity.",
     metrics: [
       { value: "+12%p", label: "F1" },
       { value: "95.84%", label: "accuracy" },
@@ -479,23 +479,23 @@ export const projects: Project[] = [
     endDate: "2026-08-31",
     organization: "POSTECH × Seoul National University Hospital",
     summary:
-      "Compared volumetric and vertex-wise hippocampal changes across familial risk, clinical risk, first-episode psychosis, and healthy controls.",
+      "Compared hippocampal volume and local surface deformation across genetic risk, clinical high risk, first-episode psychosis, and healthy control groups.",
     contribution:
       "Co-first author. Built and improved surface generation, registration, and feature-extraction pipelines; conducted volumetric and vertex-wise statistics; and wrote the Methods section.",
     problem:
-      "Scalar volume can average away localized inward and outward surface changes, making stage-specific patterns difficult to distinguish.",
+      "Whole-structure or subfield volume can average away opposing local deformations, obscuring stage-specific patterns across psychosis risk and illness onset.",
     difficulty:
-      "The cohorts differed in demographic and clinical covariates, while surface statistics required reliable correspondence and multiple-comparison control.",
+      "The four cohorts differed in demographic and clinical covariates, while vertex-wise statistics required reliable correspondence and multiple-comparison control.",
     firstApproach:
-      "I aligned subject surfaces, checked volume effects, and compared magnitude and directional coherence of vertex-wise deformation.",
+      "Aligned subject surfaces and analyzed volumetric change together with the magnitude and directional coherence of vertex-wise deformation.",
     decision:
-      "We separated genetic risk, symptomatic clinical risk, and illness onset rather than treating them as a single continuum.",
+      "Separated inherited genetic risk, symptomatic clinical risk, and illness onset instead of treating them as a single continuous stage.",
     implementation:
-      "Contributed surface registration, MANCOVA/ANCOVA, covariate adjustment, multiple-comparison correction, and cluster-level surface interpretation for 360 participants.",
+      "Contributed surface generation, registration, feature extraction, MANCOVA, ANCOVA, covariate adjustment, and multiple-comparison correction for 360 participants: 95 FEP, 76 CHR-P, 49 unaffected relatives, and 140 healthy controls.",
     result:
-      "Identified concentrated CA1 inward deformation at illness onset and distinct posterior configurations in clinical- and genetic-risk groups that volume alone did not detect.",
+      "Found concentrated bilateral inward deformation centered on CA1 in first-episode psychosis. Clinical- and genetic-risk groups showed distinct posterior surface patterns that were not detected by volume analysis. The manuscript was prepared with co-first authorship.",
     learned:
-      "The representation determines the clinical question a dataset can answer. Local geometry can reveal patterns that disappear in global summaries.",
+      "Volume and surface representations answer different clinical questions; the chosen representation determines which disease pattern can be detected.",
     metrics: [
       { value: "360", label: "participants" },
       { value: "4", label: "risk states" },
@@ -524,23 +524,23 @@ export const projects: Project[] = [
     endDate: "2026-08-31",
     organization: "POSTECH × Korea Brain Research Institute",
     summary:
-      "Studied how maternal depression and parenting stress relate to maternal brain measures, mother–child similarity, and the developing brain.",
+      "Analyzed how maternal depression and parenting stress relate to the maternal brain, mother–child brain similarity, and the developing child brain.",
     contribution:
       "Implemented and analyzed MIND-based structural similarity across nine morphometric features and 68 ROIs, validated the imaging statistics, and contributed to the manuscript.",
     problem:
-      "The transmission pathway spans maternal symptoms, parenting stress, functional and structural similarity, and child outcomes.",
+      "The relationships among maternal depression, parenting stress, structural and functional brain similarity, and child depression measures span several linked levels that simple pairwise correlations cannot describe well.",
     difficulty:
-      "The analysis combined resting-state activation, nine morphological features, multiple outcomes, and mediation-like structural relationships.",
+      "The analysis combined resting-state activation with nine morphometric features across many brain regions and behavioral outcomes.",
     firstApproach:
-      "The team organized effects at three levels: parenting brain, mother–child similarity, and child brain development.",
+      "Organized the study into three levels: the maternal parenting brain, mother–child brain similarity, and the child’s developing brain.",
     decision:
-      "We modeled the chain of associations rather than reporting disconnected pairwise correlations.",
+      "Modeled the statistical relationships among these levels with structural regression rather than listing disconnected correlations, and interpreted the observational findings as associations rather than causal effects.",
     implementation:
-      "Contributed imaging-feature analysis and statistical validation across 119 mother–child dyads with completed neuroimaging.",
+      "Analyzed 119 mother–child dyads with completed neuroimaging, implementing MIND-based structural similarity from distributions of nine morphometric features across 68 ROIs and comparing it with functional similarity and behavioral measures.",
     result:
-      "The study linked maternal depression and parenting stress to brain similarity and child-depression-related measures, highlighting regions involved in empathy processing.",
+      "Identified statistical associations linking maternal depression and parenting stress with maternal brain measures, mother–child similarity, and child-depression-related measures, including effects in regions involved in empathy processing.",
     learned:
-      "Complex collaboration works best when each statistical result is traceable to a clearly defined biological and behavioral question.",
+      "In multi-institutional research, each statistical result must remain traceable to a clearly defined biological and behavioral question to avoid overinterpretation.",
     metrics: [
       { value: "119", label: "dyads" },
       { value: "9", label: "shape features" },
@@ -567,23 +567,23 @@ export const projects: Project[] = [
     endDate: "2024-08-31",
     organization: "POSTECH × Seoul St. Mary’s Hospital",
     summary:
-      "Explored whether unsupervised deformation fields could expose tumor-induced structural change and support detection.",
+      "Explored whether deformation fields learned through unsupervised image registration could reveal structural changes associated with brain tumors.",
     contribution:
       "Built the MRI preprocessing and unsupervised VoxelMorph pipeline, analyzed tumor-region deformation behavior, and defined validation questions with clinical collaborators.",
     problem:
-      "Tumors distort nearby anatomy, but direct labels are costly and the deformation itself may contain useful weak supervision.",
+      "Tumor labels are costly, but the way a tumor distorts surrounding anatomy may provide a useful weak signal for detection.",
     difficulty:
-      "A deformation field can reflect registration behavior as well as pathology, so visual expansion alone is not sufficient evidence.",
+      "Changes in a deformation field can reflect registration behavior or model artifacts as well as pathology, so visual expansion alone cannot establish detection performance.",
     firstApproach:
-      "I trained a VoxelMorph-based unsupervised registration model and inspected how tumor regions changed under learned deformation.",
+      "Trained a VoxelMorph-based unsupervised registration model and inspected how the deformation field and warped image changed around tumor regions.",
     decision:
-      "I treated the observation as a feasibility signal and documented the validation required before turning it into a detection claim.",
+      "Treated automatic expansion around tumors as a feasibility signal that required follow-up validation, not as a confirmed performance result.",
     implementation:
-      "Prepared the imaging pipeline, trained the deformation model, and discussed clinically meaningful evaluation with medical collaborators.",
+      "Prepared the MRI pipeline, trained the unsupervised deformation model, analyzed tumor-region behavior, and discussed clinically meaningful evaluation with medical collaborators.",
     result:
-      "Observed automatic expansion around tumor regions and established a concrete direction for evaluating deformation-derived tumor cues.",
+      "Observed automatic expansion around tumor regions and established a concrete direction for evaluating deformation-derived tumor cues. No quantitative detection-performance claim was made without separate clinical validation.",
     learned:
-      "An interesting model behavior is a hypothesis, not a result, until the evaluation isolates it from alternative explanations.",
+      "An interesting model behavior remains a hypothesis until evaluation rules out registration artifacts and other alternative explanations.",
     metrics: [
       { value: "VoxelMorph", label: "unsupervised model" },
       { value: "Clinical", label: "validation design" },
@@ -615,23 +615,23 @@ export const projects: Project[] = [
     endDate: "2022-06-28",
     organization: "Undergraduate project",
     summary:
-      "Built a VGG16-based braking classifier and deployed the pipeline on NVIDIA Jetson Xavier NX hardware.",
+      "Built an Xavier NX prototype that classified braking situations from a forward-facing camera and activated a physical brake mechanism.",
     contribution:
       "Developed the VGG16 braking classifier and end-to-end control software on Xavier NX, and supported Arduino and mechanical brake integration.",
     problem:
-      "A compact mobility device needed to recognize braking situations with enough accuracy and latency for an embedded prototype.",
+      "A compact mobility device needed to recognize hazardous situations and transmit a braking command within an embedded operating environment.",
     difficulty:
-      "The design had to connect image classification, decision logic, and mountable hardware rather than stop at offline accuracy.",
+      "The prototype had to connect camera input, edge inference, Arduino communication, and physical braking rather than stop at an offline classification score.",
     firstApproach:
-      "I established the scenario labels and evaluated a transfer-learning baseline before hardware integration.",
+      "Defined camera frames as braking or non-braking situations and designed the end-to-end path from model output to hardware actuation.",
     decision:
-      "I selected a proven CNN backbone and focused the remaining effort on reliable embedded execution and system integration.",
+      "Ran VGG16 on Jetson Xavier NX and sent an Arduino signal to activate a rubber brake pad whenever the frame was classified as requiring braking.",
     implementation:
-      "Processed front-camera images with VGG16 on Xavier NX, sent the braking decision to an Arduino, and actuated a rubber braking pad on the prototype.",
+      "Trained the VGG16 classifier, implemented the inference and control software, and supported integration of the Arduino and mechanical brake hardware.",
     result:
-      "Achieved 98% classification accuracy and built a hardware-mountable prototype.",
+      "Achieved 98% braking-situation classification accuracy, completed a kickboard-mountable prototype, and submitted the work to an ICT competition.",
     learned:
-      "Safety-oriented prototypes need clear operating boundaries and system tests beyond a single validation score.",
+      "Embedded vision must be evaluated across the entire path from sensor input to physical action, including latency and failure modes.",
     metrics: [
       { value: "98%", label: "accuracy" },
       { value: "Xavier NX", label: "edge deployment" },
