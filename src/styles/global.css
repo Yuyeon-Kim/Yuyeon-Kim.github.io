@@ -307,9 +307,10 @@ html[data-language="ko"] .eyebrow {
   text-transform: uppercase;
 }
 
-.hero-kicker span {
+.hero-kicker > span[aria-hidden="true"] {
   width: 9px;
   height: 9px;
+  flex: 0 0 9px;
   border-radius: 50%;
   background: var(--aqua);
   box-shadow: 0 0 0 6px rgba(32, 189, 168, 0.12);
