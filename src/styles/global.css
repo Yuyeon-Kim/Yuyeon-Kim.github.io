@@ -1197,6 +1197,26 @@ a {
   line-height: 1.75;
 }
 
+.case-contribution {
+  max-width: 850px;
+  margin-top: 24px;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--cobalt);
+}
+
+.case-contribution .eyebrow {
+  margin: 0 0 7px;
+  color: var(--cobalt-dark);
+}
+
+.case-contribution > p:last-child {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  font-weight: 640;
+  line-height: 1.65;
+}
+
 .case-meta {
   display: flex;
   flex-wrap: wrap;

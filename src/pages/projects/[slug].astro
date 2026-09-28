@@ -53,6 +53,10 @@ const related = projects
         <p class="eyebrow">{project.eyebrow}</p>
         <h1>{project.title}</h1>
         <p class="case-deck">{project.summary}</p>
+        <div class="case-contribution">
+          <p class="eyebrow">My Contribution</p>
+          <p>{project.contribution}</p>
+        </div>
         <div class="case-meta">
           <span><b>Start date</b><time datetime={project.startDate}>{displayDate(project.startDate)}</time></span>
           <span><b>End date</b><time datetime={project.endDate}>{displayDate(project.endDate)}</time></span>

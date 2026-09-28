@@ -15,6 +15,7 @@ export type Project = {
   endDate: string;
   organization: string;
   summary: string;
+  contribution: string;
   problem: string;
   difficulty: string;
   firstApproach: string;
@@ -111,6 +112,8 @@ export const projects: Project[] = [
     organization: "POSTECH MIP Lab",
     summary:
       "A topology-consistent reconstruction framework that preserves the thin hippocampal sulcus using training-time guidance and template-to-subject deformation.",
+    contribution:
+      "Lead author. Designed the sulcus-aware deformation framework, built the training and evaluation pipeline, performed baseline and morphometric analyses, and led manuscript and figure preparation.",
     problem:
       "Conventional surface pipelines often erase the hippocampal sulcus through partial-volume effects and smoothing, while flexible deformation methods can introduce self-intersections or invalid topology.",
     difficulty:
@@ -164,6 +167,8 @@ export const projects: Project[] = [
     organization: "Dongguk University × VESTELLALAB",
     summary:
       "Reframed a 38-million-point bottleneck as independent object-level work, then parallelized meshing under ordinary workstation memory constraints.",
+    contribution:
+      "Project lead and co-first author. Designed the object-wise processing pipeline, implemented parallel meshing and thread benchmarks, applied SECOND vehicle detection, and integrated Unity visualization.",
     problem:
       "Meshing an entire parking-garage point cloud at once caused processing time and memory use to grow beyond what a standard office workstation could handle.",
     difficulty:
@@ -213,6 +218,8 @@ export const projects: Project[] = [
     organization: "KIST Intelligent Robotics",
     summary:
       "Improved plant-growth measurement models and delivered them as maintainable desktop software for repeated use in an automated farm.",
+    contribution:
+      "Improved SAM/YOLOR segmentation and EfficientNet keypoint detection, redesigned stem-diameter measurement, and refactored the PyQt5 application for repeated research use.",
     problem:
       "Plant stem diameter and branching points were measured manually, creating repetitive work and inconsistent results across images and operators.",
     difficulty:
@@ -256,6 +263,8 @@ export const projects: Project[] = [
     organization: "HanIeum ICT Mentoring",
     summary:
       "Built a subway-congestion prototype around a compact student model so crowd counts could be estimated near the camera instead of transmitting full video.",
+    contribution:
+      "Co-first author and presenter. Selected the teacher–student pair, designed the distillation loss and training schedule, ran alpha experiments, and helped build the demonstration software.",
     problem:
       "A subway congestion service needed useful count accuracy without sending multiple high-bandwidth camera streams to a central server.",
     difficulty:
@@ -298,6 +307,8 @@ export const projects: Project[] = [
     organization: "Semicon Bootcamp",
     summary:
       "Used DOE, interpretable ML, and constrained search to examine the trade-off among within-wafer uniformity, throughput, and lot-to-lot variation.",
+    contribution:
+      "Analyzed the DOE datasets, compared ML models, interpreted SHAP results, searched constrained operating conditions, and evaluated confirmation experiments.",
     problem:
       "Process engineers must improve productivity without allowing uniformity or between-wafer variation to move outside a controllable margin.",
     difficulty:
@@ -341,6 +352,8 @@ export const projects: Project[] = [
     organization: "Industry Partner × POSTECH",
     summary:
       "Built a KNN-based similarity-search and error-analysis framework for a large-scale data workflow.",
+    contribution:
+      "Developed the KNN similarity-search pipeline, organized failure cases, tuned parameters, and documented results for cross-team review.",
     problem:
       "The project needed a reproducible way to retrieve comparable records and explain why individual candidates succeeded or failed beyond a single aggregate score.",
     difficulty:
@@ -382,6 +395,8 @@ export const projects: Project[] = [
     organization: "Dongguk ATRC × KORAIL",
     summary:
       "Developed ROS2 LiDAR algorithms for detecting obstacles, missing ballast, subsidence, and flooding on an autonomous railway inspection robot.",
+    contribution:
+      "Developed four LiDAR anomaly-detection modules in C++/Python and integrated them into a ROS2-based railway inspection robot; also fixed a Virtual LiDAR packet bug in Unity C#.",
     problem:
       "Rail inspection required repeatable detection of several infrastructure hazards from a moving robot under real sensor and operating constraints.",
     difficulty:
@@ -418,6 +433,8 @@ export const projects: Project[] = [
     organization: "Dongguk University × NeuroCircuit",
     summary:
       "Reduced spurious skin-tone and lighting variation before ensemble classification of four alopecia-severity levels.",
+    contribution:
+      "Developed color normalization and targeted augmentation, ran CNN ensemble experiments, and contributed to the paper’s experimental analysis and writing.",
     problem:
       "A limited microscope-image dataset contained large color shifts from lighting and skin tone that could dominate the medically relevant pattern.",
     difficulty:
@@ -463,6 +480,8 @@ export const projects: Project[] = [
     organization: "POSTECH × Seoul National University Hospital",
     summary:
       "Compared volumetric and vertex-wise hippocampal changes across familial risk, clinical risk, first-episode psychosis, and healthy controls.",
+    contribution:
+      "Co-first author. Built and improved surface generation, registration, and feature-extraction pipelines; conducted volumetric and vertex-wise statistics; and wrote the Methods section.",
     problem:
       "Scalar volume can average away localized inward and outward surface changes, making stage-specific patterns difficult to distinguish.",
     difficulty:
@@ -506,6 +525,8 @@ export const projects: Project[] = [
     organization: "POSTECH × Korea Brain Research Institute",
     summary:
       "Studied how maternal depression and parenting stress relate to maternal brain measures, mother–child similarity, and the developing brain.",
+    contribution:
+      "Implemented and analyzed MIND-based structural similarity across nine morphometric features and 68 ROIs, validated the imaging statistics, and contributed to the manuscript.",
     problem:
       "The transmission pathway spans maternal symptoms, parenting stress, functional and structural similarity, and child outcomes.",
     difficulty:
@@ -547,6 +568,8 @@ export const projects: Project[] = [
     organization: "POSTECH × Seoul St. Mary’s Hospital",
     summary:
       "Explored whether unsupervised deformation fields could expose tumor-induced structural change and support detection.",
+    contribution:
+      "Built the MRI preprocessing and unsupervised VoxelMorph pipeline, analyzed tumor-region deformation behavior, and defined validation questions with clinical collaborators.",
     problem:
       "Tumors distort nearby anatomy, but direct labels are costly and the deformation itself may contain useful weak supervision.",
     difficulty:
@@ -593,6 +616,8 @@ export const projects: Project[] = [
     organization: "Undergraduate project",
     summary:
       "Built a VGG16-based braking classifier and deployed the pipeline on NVIDIA Jetson Xavier NX hardware.",
+    contribution:
+      "Developed the VGG16 braking classifier and end-to-end control software on Xavier NX, and supported Arduino and mechanical brake integration.",
     problem:
       "A compact mobility device needed to recognize braking situations with enough accuracy and latency for an embedded prototype.",
     difficulty:
