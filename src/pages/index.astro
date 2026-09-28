@@ -9,7 +9,17 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import { profile, projects, publications } from '@/data/portfolio';
 import { profileKo, publicationsKo } from '@/data/portfolio-ko';
 
-const featured = projects.filter((project) => project.featured);
+const featuredSlugs = [
+  'sulcus-aware-hippocampal-surface',
+  'psychosis-hippocampal-shape',
+  'maternal-depression-brain-similarity',
+  'scalp-image-analysis',
+  'smart-farm-vision-automation',
+  'railway-lidar-inspection-robot',
+];
+const featured = featuredSlugs
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project) => project !== undefined);
 ---
 
 <BaseLayout page="home">
@@ -20,7 +30,7 @@ const featured = projects.filter((project) => project.featured);
         <span
           data-i18n
           data-en="AI research · data · engineered systems"
-          data-ko="AI 연구 · 데이터 · 시스템 구현"
+          data-ko="정신의학 · 의료영상 · 머신러닝"
         >AI research · data · engineered systems</span>
       </p>
       <h1 data-i18n data-en={profile.name} data-ko={profile.koreanName}>{profile.name}</h1>
@@ -93,11 +103,11 @@ const featured = projects.filter((project) => project.featured);
   <section class="projects-section shell section-space">
     <SectionHeading
       eyebrow="Selected work"
-      eyebrowKo="주요 프로젝트"
+      eyebrowKo="주요 연구 및 프로젝트"
       title="Problems made smaller, faster, or more measurable."
-      titleKo="더 작게, 더 빠르게, 더 측정 가능하게 만든 문제들."
+      titleKo="의료영상 연구를 중심으로 확장해 온 프로젝트."
       intro="The portfolio view changes what appears first; the underlying evidence stays the same."
-      introKo="선택한 관점에 따라 우선순위만 달라지며, 근거와 성과는 그대로 유지됩니다."
+      introKo="해마 표면 복원과 정신의학 영상 분석을 중심으로, 컴퓨터 비전·로보틱스·제조 AI 경험을 함께 정리했습니다."
       href="/projects/"
       linkLabel="All projects"
       linkLabelKo="전체 프로젝트"
@@ -118,7 +128,7 @@ const featured = projects.filter((project) => project.featured);
       eyebrow="Experience"
       eyebrowKo="경력"
       title="Research depth, field constraints, and delivery."
-      titleKo="연구의 깊이, 현장의 제약, 그리고 구현."
+      titleKo="의료 AI 연구에서 현장 시스템 구현까지."
       intro="A focused timeline here; the full career archive includes research, industry collaboration, teaching, and early operations work."
       introKo="핵심 연구 경력과 함께 산업 공동연구, 교육, 운영 및 초기 실무 경험까지 전체 타임라인에 담았습니다."
       href="/experience/"
@@ -135,7 +145,7 @@ const featured = projects.filter((project) => project.featured);
         <h2
           data-i18n
           data-en={`${publications.length} papers and active manuscripts across geometry, vision, and neuroimaging.`}
-          data-ko={`${publications.length}편의 논문 및 진행 원고: 형상, 비전, 신경영상 연구.`}
+          data-ko={`${publications.length}편의 논문 및 진행 중인 원고: 의료영상, 정신의학, 컴퓨터 비전 연구.`}
         >{publications.length} papers and active manuscripts across geometry, vision, and neuroimaging.</h2>
         <p
           data-i18n

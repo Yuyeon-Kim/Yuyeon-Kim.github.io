@@ -67,7 +67,7 @@ const related = projects
         <h1 data-i18n data-en={project.title} data-ko={projectKo.title}>{project.title}</h1>
         <p class="case-deck" data-i18n data-en={project.summary} data-ko={projectKo.summary}>{project.summary}</p>
         <div class="case-contribution">
-          <p class="eyebrow" data-i18n data-en="My Contribution" data-ko="내가 한 일">My Contribution</p>
+          <p class="eyebrow" data-i18n data-en="My Contribution" data-ko="담당 역할">My Contribution</p>
           <p data-i18n data-en={project.contribution} data-ko={projectKo.contribution}>{project.contribution}</p>
         </div>
         <div class="case-meta">
@@ -116,51 +116,51 @@ const related = projects
 
     <div class="case-body shell">
       <aside class="case-nav">
-        <p class="eyebrow" data-i18n data-en="Case outline" data-ko="구성">Case outline</p>
-        <a href="#problem">01 · <span data-i18n data-en="Problem" data-ko="문제">Problem</span></a>
-        <a href="#difficulty">02 · <span data-i18n data-en="Why difficult" data-ko="난점">Why difficult</span></a>
-        <a href="#approach">03 · <span data-i18n data-en="First approach" data-ko="초기 접근">First approach</span></a>
-        <a href="#decision">04 · <span data-i18n data-en="Decision" data-ko="판단">Decision</span></a>
-        <a href="#implementation">05 · <span data-i18n data-en="Implementation" data-ko="구현">Implementation</span></a>
-        <a href="#result">06 · <span data-i18n data-en="Result" data-ko="결과">Result</span></a>
-        <a href="#learning">07 · <span data-i18n data-en="Learning" data-ko="배운 점">Learning</span></a>
+        <p class="eyebrow" data-i18n data-en="Case outline" data-ko="프로젝트 구성">Case outline</p>
+        <a href="#problem">01 · <span data-i18n data-en="Problem" data-ko="연구 배경">Problem</span></a>
+        <a href="#difficulty">02 · <span data-i18n data-en="Why difficult" data-ko="핵심 과제">Why difficult</span></a>
+        <a href="#approach">03 · <span data-i18n data-en="First approach" data-ko="검토 과정">First approach</span></a>
+        <a href="#decision">04 · <span data-i18n data-en="Decision" data-ko="연구 설계">Decision</span></a>
+        <a href="#implementation">05 · <span data-i18n data-en="Implementation" data-ko="구현 및 분석">Implementation</span></a>
+        <a href="#result">06 · <span data-i18n data-en="Result" data-ko="주요 결과">Result</span></a>
+        <a href="#learning">07 · <span data-i18n data-en="Learning" data-ko="연구적 의미">Learning</span></a>
       </aside>
 
       <div class="case-sections">
         <section id="problem">
           <span>01</span>
-          <p class="eyebrow" data-i18n data-en="Problem" data-ko="문제">Problem</p>
-          <h2 data-i18n data-en="What had to change?" data-ko="무엇을 바꿔야 했는가?">What had to change?</h2>
+          <p class="eyebrow" data-i18n data-en="Problem" data-ko="연구 배경">Problem</p>
+          <h2 data-i18n data-en="What had to change?" data-ko="연구 배경">What had to change?</h2>
           <p data-i18n data-en={project.problem} data-ko={projectKo.problem}>{project.problem}</p>
         </section>
         <section id="difficulty">
           <span>02</span>
-          <p class="eyebrow" data-i18n data-en="Why it was difficult" data-ko="난점">Why it was difficult</p>
-          <h2 data-i18n data-en="The constraint behind the metric." data-ko="성과 지표 뒤의 제약.">The constraint behind the metric.</h2>
+          <p class="eyebrow" data-i18n data-en="Why it was difficult" data-ko="핵심 과제">Why it was difficult</p>
+          <h2 data-i18n data-en="The constraint behind the metric." data-ko="해결해야 했던 과제">The constraint behind the metric.</h2>
           <p data-i18n data-en={project.difficulty} data-ko={projectKo.difficulty}>{project.difficulty}</p>
         </section>
         <section id="approach">
           <span>03</span>
-          <p class="eyebrow" data-i18n data-en="First approach" data-ko="초기 접근">First approach</p>
-          <h2 data-i18n data-en="Make the failure measurable." data-ko="실패 원인을 측정 가능한 문제로 정의했습니다.">Make the failure measurable.</h2>
+          <p class="eyebrow" data-i18n data-en="First approach" data-ko="검토 과정">First approach</p>
+          <h2 data-i18n data-en="Make the failure measurable." data-ko="접근 방법 검토">Make the failure measurable.</h2>
           <p data-i18n data-en={project.firstApproach} data-ko={projectKo.firstApproach}>{project.firstApproach}</p>
         </section>
         <section id="decision">
           <span>04</span>
-          <p class="eyebrow" data-i18n data-en="Decision" data-ko="판단">Decision</p>
-          <h2 data-i18n data-en="Choose the right unit of work." data-ko="적절한 해결 단위를 선택했습니다.">Choose the right unit of work.</h2>
+          <p class="eyebrow" data-i18n data-en="Decision" data-ko="연구 설계">Decision</p>
+          <h2 data-i18n data-en="Choose the right unit of work." data-ko="최종 연구 설계">Choose the right unit of work.</h2>
           <p data-i18n data-en={project.decision} data-ko={projectKo.decision}>{project.decision}</p>
         </section>
         <section id="implementation">
           <span>05</span>
-          <p class="eyebrow" data-i18n data-en="Implementation" data-ko="구현">Implementation</p>
-          <h2 data-i18n data-en="Connect the method to the system." data-ko="방법을 실제 시스템으로 연결했습니다.">Connect the method to the system.</h2>
+          <p class="eyebrow" data-i18n data-en="Implementation" data-ko="구현 및 분석">Implementation</p>
+          <h2 data-i18n data-en="Connect the method to the system." data-ko="구현 및 분석">Connect the method to the system.</h2>
           <p data-i18n data-en={project.implementation} data-ko={projectKo.implementation}>{project.implementation}</p>
         </section>
         <section id="result" class="case-result-section">
           <span>06</span>
-          <p class="eyebrow" data-i18n data-en="Result" data-ko="결과">Result</p>
-          <h2 data-i18n data-en="Measured outcome." data-ko="수치로 확인한 성과.">Measured outcome.</h2>
+          <p class="eyebrow" data-i18n data-en="Result" data-ko="주요 결과">Result</p>
+          <h2 data-i18n data-en="Measured outcome." data-ko="주요 결과">Measured outcome.</h2>
           <p data-i18n data-en={project.result} data-ko={projectKo.result}>{project.result}</p>
           <div class="case-metric-grid">
             {project.metrics.map((metric, index) => (
@@ -173,8 +173,8 @@ const related = projects
         </section>
         <section id="learning">
           <span>07</span>
-          <p class="eyebrow" data-i18n data-en="What I learned" data-ko="배운 점">What I learned</p>
-          <h2 data-i18n data-en="How this changed my next decision." data-ko="다음 판단에 적용한 원칙.">How this changed my next decision.</h2>
+          <p class="eyebrow" data-i18n data-en="What I learned" data-ko="연구적 의미">What I learned</p>
+          <h2 data-i18n data-en="How this changed my next decision." data-ko="연구적 의미">How this changed my next decision.</h2>
           <p data-i18n data-en={project.learned} data-ko={projectKo.learned}>{project.learned}</p>
         </section>
       </div>
