@@ -1,5 +1,6 @@
 ---
 import type { Project } from '@/data/portfolio';
+import { projectKoBySlug } from '@/data/portfolio-ko';
 
 interface Props {
   project: Project;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { project, index = 0, filter = false } = Astro.props;
+const projectKo = projectKoBySlug(project.slug)!;
 ---
 
 <article
@@ -18,27 +20,77 @@ const { project, index = 0, filter = false } = Astro.props;
 >
   {project.image && (
     <div class="project-card-image">
-      <img src={project.image} alt={project.imageAlt || ''} loading="lazy" />
+      <img
+        src={project.image}
+        alt={project.imageAlt || ''}
+        data-i18n-alt
+        data-alt-en={project.imageAlt || ''}
+        data-alt-ko={projectKo.imageAlt}
+        loading="lazy"
+      />
     </div>
   )}
   <div class="project-card-body">
     <div class="project-card-topline">
-      <p class="eyebrow">{project.eyebrow}</p>
+      <p class="eyebrow" data-i18n data-en={project.eyebrow} data-ko={projectKo.eyebrow}>{project.eyebrow}</p>
       <span>{project.period}</span>
     </div>
-    <h3><a href={`/projects/${project.slug}/`} data-preserve-view>{project.title}</a></h3>
-    <p class="project-summary">{project.summary}</p>
-    <div class="mini-metrics" aria-label="Project results">
-      {project.metrics.slice(0, 3).map((metric) => (
-        <span><strong>{metric.value}</strong> {metric.label}</span>
+    <h3>
+      <a
+        href={`/projects/${project.slug}/`}
+        data-preserve-view
+        data-i18n
+        data-en={project.title}
+        data-ko={projectKo.title}
+      >{project.title}</a>
+    </h3>
+    <p
+      class="project-summary"
+      data-i18n
+      data-en={project.summary}
+      data-ko={projectKo.summary}
+    >{project.summary}</p>
+    <div
+      class="mini-metrics"
+      aria-label="Project results"
+      data-i18n-aria-label
+      data-aria-en="Project results"
+      data-aria-ko="프로젝트 성과"
+    >
+      {project.metrics.slice(0, 3).map((metric, metricIndex) => (
+        <span>
+          <strong
+            data-i18n
+            data-en={metric.value}
+            data-ko={projectKo.metrics[metricIndex].value}
+          >{metric.value}</strong>{' '}
+          <span data-i18n data-en={metric.label} data-ko={projectKo.metrics[metricIndex].label}>{metric.label}</span>
+        </span>
       ))}
     </div>
     <div class="project-card-footer">
-      <div class="tag-list" aria-label="Technologies">
-        {project.tags.slice(0, 4).map((tag) => <span>{tag}</span>)}
+      <div
+        class="tag-list"
+        aria-label="Technologies and methods"
+        data-i18n-aria-label
+        data-aria-en="Technologies and methods"
+        data-aria-ko="기술 및 방법"
+      >
+        {project.tags.slice(0, 4).map((tag, tagIndex) => (
+          <span data-i18n data-en={tag} data-ko={projectKo.tags[tagIndex]}>{tag}</span>
+        ))}
       </div>
-      <a class="project-arrow" href={`/projects/${project.slug}/`} data-preserve-view aria-label={`View ${project.title}`}>
-        <span>Case study</span><b aria-hidden="true">↗</b>
+      <a
+        class="project-arrow"
+        href={`/projects/${project.slug}/`}
+        data-preserve-view
+        aria-label={`View ${project.title}`}
+        data-i18n-aria-label
+        data-aria-en={`View ${project.title}`}
+        data-aria-ko={`${projectKo.title} 보기`}
+      >
+        <span data-i18n data-en="Case study" data-ko="자세히 보기">Case study</span>
+        <b aria-hidden="true">↗</b>
       </a>
     </div>
   </div>

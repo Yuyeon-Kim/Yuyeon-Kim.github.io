@@ -1,16 +1,18 @@
 ---
 import { profile } from '@/data/portfolio';
+import { profileKo } from '@/data/portfolio-ko';
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="shell footer-grid">
-    <div>
-      <p class="footer-name">{profile.name} <span>{profile.koreanName}</span></p>
-      <p>AI research grounded in measurable outcomes.</p>
-    </div>
-    <div class="footer-links">
-      <a href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-      <span>{profile.location}</span>
-    </div>
+  <div class="shell footer-inner">
+    <p>© {year} <span data-i18n data-en={profile.name} data-ko={profile.koreanName}>{profile.name}</span></p>
+    <p
+      data-i18n
+      data-en="AI research grounded in measurable outcomes."
+      data-ko="측정 가능한 성과를 만드는 AI 연구."
+    >AI research grounded in measurable outcomes.</p>
+    <p data-i18n data-en={profile.location} data-ko={profileKo.location}>{profile.location}</p>
   </div>
 </footer>

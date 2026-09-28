@@ -2,9 +2,20 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Page not found · Yuyeon Kim">
+<BaseLayout title="Page not found · Yuyeon Kim" titleKo="페이지를 찾을 수 없습니다 · 김유연">
   <section class="not-found shell">
     <span>404</span>
-    <div><p class="eyebrow">Page not found</p><h1>This route is not in the portfolio database.</h1><a class="button button--primary" href="/">Return home</a></div>
+    <div>
+      <p class="eyebrow" data-i18n data-en="Page not found" data-ko="페이지를 찾을 수 없습니다">Page not found</p>
+      <h1
+        data-i18n
+        data-en="This route is not in the portfolio database."
+        data-ko="요청한 주소는 포트폴리오에 없습니다."
+      >This route is not in the portfolio database.</h1>
+      <a class="button button--primary" href="/">
+        <span data-i18n data-en="Return home" data-ko="홈으로 돌아가기">Return home</span>
+      </a>
+    </div>
   </section>
 </BaseLayout>
+

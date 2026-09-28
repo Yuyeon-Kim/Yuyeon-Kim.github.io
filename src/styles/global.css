@@ -147,6 +147,12 @@ a {
   min-height: 72px;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -209,6 +215,54 @@ a {
 
 .site-nav .nav-github::after {
   display: none;
+}
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(244, 247, 252, 0.86);
+}
+
+.language-switcher button {
+  min-width: 38px;
+  padding: 6px 7px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.045em;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.language-switcher button:hover {
+  color: var(--ink);
+}
+
+.language-switcher button.is-active {
+  background: white;
+  color: var(--cobalt-dark);
+  box-shadow: 0 2px 8px rgba(25, 47, 89, 0.12);
+}
+
+.language-switcher > span {
+  color: var(--line-strong);
+  font-size: 0.68rem;
+}
+
+html[data-language="ko"] body {
+  word-break: keep-all;
+}
+
+html[data-language="ko"] .eyebrow {
+  letter-spacing: 0.045em;
+  text-transform: none;
 }
 
 .menu-button {
@@ -2021,8 +2075,12 @@ a {
 }
 
 @media (max-width: 1040px) {
+  .header-controls {
+    gap: 14px;
+  }
+
   .site-nav {
-    gap: 18px;
+    gap: 14px;
   }
 
   .related-projects .project-grid {
@@ -2090,6 +2148,19 @@ a {
 
   .menu-button {
     display: block;
+  }
+
+  .header-controls {
+    gap: 8px;
+  }
+
+  .language-switcher {
+    padding: 4px;
+  }
+
+  .language-switcher button {
+    min-width: 36px;
+    padding: 6px;
   }
 
   .site-nav {

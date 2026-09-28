@@ -1,28 +1,31 @@
 ---
 import { metrics } from '@/data/portfolio';
-
-interface Props {
-  limit?: number;
-}
-
-const { limit } = Astro.props;
-const shownMetrics = typeof limit === 'number' ? metrics.slice(0, limit) : metrics;
+import { metricsKo } from '@/data/portfolio-ko';
 ---
 
-<div class="metric-strip" aria-label="Selected outcomes">
-  {shownMetrics.map((metric) => (
-    <article class="metric-cell" data-views={metric.views.join(' ')}>
-      <p
-        class="metric-value"
-        data-count={metric.number}
-        data-prefix={metric.prefix}
-        data-suffix={metric.suffix}
-        data-direction={metric.direction}
-      >
-        {metric.value}{metric.direction ? ` ${metric.direction}` : ''}
-      </p>
-      <p class="metric-label">{metric.label}</p>
-      <p class="metric-context">{metric.context}</p>
-    </article>
-  ))}
+<div
+  class="metric-strip"
+  aria-label="Selected outcomes"
+  data-i18n-aria-label
+  data-aria-en="Selected outcomes"
+  data-aria-ko="주요 성과"
+>
+  {metrics.map((metric, index) => {
+    const ko = metricsKo[index];
+    return (
+      <article class="metric-cell" data-views={metric.views.join(' ')}>
+        <strong
+          data-count={metric.number}
+          data-prefix={metric.prefix}
+          data-suffix={metric.suffix}
+          data-direction={metric.direction}
+        >
+          {metric.value}{metric.direction ? ` ${metric.direction}` : ''}
+        </strong>
+        <span data-i18n data-en={metric.label} data-ko={ko.label}>{metric.label}</span>
+        <small data-i18n data-en={metric.context} data-ko={ko.context}>{metric.context}</small>
+      </article>
+    );
+  })}
 </div>
+

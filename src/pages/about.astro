@@ -3,36 +3,61 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/PageHero.astro';
 import CareerMap from '@/components/CareerMap.astro';
 import { education, semiconductorEducation, awards, certifications, skillGroups, profile } from '@/data/portfolio';
+import {
+  educationKo,
+  semiconductorEducationKo,
+  awardsKo,
+  certificationsKo,
+  skillGroupsKo,
+} from '@/data/portfolio-ko';
 ---
 
 <BaseLayout
   page="about"
   title="About & Skills · Yuyeon Kim"
+  titleKo="소개 & 기술 · 김유연"
   description="Education, evidence-linked technical skills, awards, certifications, and career map."
+  descriptionKo="김유연의 학력, 프로젝트로 증명한 기술, 수상, 자격 및 커리어 맵."
 >
   <PageHero
-    index="04"
     eyebrow="About"
+    eyebrowKo="소개"
     title="A computer scientist who follows the data into the system."
+    titleKo="데이터를 따라 시스템까지 구현하는 컴퓨터공학자."
     intro="My strongest work sits at the boundary: model and geometry, research and software, sensor and decision, process and yield. I learn the domain deeply enough to choose a better technical question."
+    introKo="저의 강점은 모델과 형상, 연구와 소프트웨어, 센서와 의사결정, 공정과 수율이 만나는 지점에 있습니다. 기술보다 먼저 도메인을 이해하고 더 정확한 질문을 선택합니다."
   />
 
   <section class="map-section section-space"><div class="shell"><CareerMap /></div></section>
 
   <section class="shell section-space about-grid-section">
     <div class="about-column">
-      <p class="eyebrow">Education</p>
+      <p class="eyebrow" data-i18n data-en="Education" data-ko="학력">Education</p>
       <div class="record-list">
-        {education.map((item) => (
-          <article><span>{item.period}</span><h2>{item.institution}</h2><p class="record-title">{item.degree}</p><p>{item.detail}</p></article>
+        {education.map((item, index) => (
+          <article>
+            <span>{item.period}</span>
+            <h2 data-i18n data-en={item.institution} data-ko={educationKo[index].institution}>{item.institution}</h2>
+            <p class="record-title" data-i18n data-en={item.degree} data-ko={educationKo[index].degree}>{item.degree}</p>
+            <p data-i18n data-en={item.detail} data-ko={educationKo[index].detail}>{item.detail}</p>
+          </article>
         ))}
       </div>
     </div>
     <div class="about-column">
-      <p class="eyebrow">Semiconductor learning</p>
+      <p class="eyebrow" data-i18n data-en="Semiconductor learning" data-ko="반도체 교육">Semiconductor learning</p>
       <div class="record-list compact-records">
-        {semiconductorEducation.map((item) => (
-          <article><span>{item.period}</span><h2>{item.title}</h2><p class="record-title">{item.provider}</p><p>{item.detail}</p></article>
+        {semiconductorEducation.map((item, index) => (
+          <article>
+            <span
+              data-i18n
+              data-en={item.period}
+              data-ko={semiconductorEducationKo[index].period}
+            >{item.period}</span>
+            <h2 data-i18n data-en={item.title} data-ko={semiconductorEducationKo[index].title}>{item.title}</h2>
+            <p class="record-title" data-i18n data-en={item.provider} data-ko={semiconductorEducationKo[index].provider}>{item.provider}</p>
+            <p data-i18n data-en={item.detail} data-ko={semiconductorEducationKo[index].detail}>{item.detail}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -40,12 +65,31 @@ import { education, semiconductorEducation, awards, certifications, skillGroups,
 
   <section class="skills-section section-space">
     <div class="shell">
-      <div class="section-heading"><div><p class="eyebrow">Skills backed by real work</p><h2>No arbitrary proficiency bars. Every skill is tied to a project where I applied it.</h2></div></div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" data-i18n data-en="Skills backed by real work" data-ko="프로젝트로 증명한 기술">Skills backed by real work</p>
+          <h2
+            data-i18n
+            data-en="No arbitrary proficiency bars. Every skill is tied to a project where I applied it."
+            data-ko="막연한 숙련도 막대 대신, 각 기술을 실제로 적용한 프로젝트를 함께 제시합니다."
+          >No arbitrary proficiency bars. Every skill is tied to a project where I applied it.</h2>
+        </div>
+      </div>
       <div class="skills-grid">
         {skillGroups.map((group, index) => (
           <article>
-            <div class="skill-group-head"><span>{String(index + 1).padStart(2, '0')}</span><h3>{group.title}</h3></div>
-            <ul>{group.items.map((item) => <li><strong>{item.name}</strong><span>{item.evidence}</span></li>)}</ul>
+            <div class="skill-group-head">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3 data-i18n data-en={group.title} data-ko={skillGroupsKo[index].title}>{group.title}</h3>
+            </div>
+            <ul>
+              {group.items.map((item, itemIndex) => (
+                <li>
+                  <strong data-i18n data-en={item.name} data-ko={skillGroupsKo[index].items[itemIndex].name}>{item.name}</strong>
+                  <span data-i18n data-en={item.evidence} data-ko={skillGroupsKo[index].items[itemIndex].evidence}>{item.evidence}</span>
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
@@ -54,19 +98,46 @@ import { education, semiconductorEducation, awards, certifications, skillGroups,
 
   <section class="shell section-space recognition-section">
     <div>
-      <p class="eyebrow">Awards</p>
-      <ul class="recognition-list">{awards.map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}</ul>
+      <p class="eyebrow" data-i18n data-en="Awards" data-ko="수상">Awards</p>
+      <ul class="recognition-list">
+        {awards.map((item, index) => (
+          <li>
+            <span>{item.year}</span>
+            <strong data-i18n data-en={item.title} data-ko={awardsKo[index].title}>{item.title}</strong>
+            <em data-i18n data-en={item.issuer} data-ko={awardsKo[index].issuer}>{item.issuer}</em>
+          </li>
+        ))}
+      </ul>
     </div>
     <div>
-      <p class="eyebrow">Certifications</p>
-      <ul class="recognition-list">{certifications.map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}</ul>
+      <p class="eyebrow" data-i18n data-en="Certifications" data-ko="자격 · 인증">Certifications</p>
+      <ul class="recognition-list">
+        {certifications.map((item, index) => (
+          <li>
+            <span>{item.year}</span>
+            <strong data-i18n data-en={item.title} data-ko={certificationsKo[index].title}>{item.title}</strong>
+            <em data-i18n data-en={item.issuer} data-ko={certificationsKo[index].issuer}>{item.issuer}</em>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
   <section class="contact-band">
     <div class="shell contact-band-inner">
-      <div><p class="eyebrow">Connect</p><h2>Explore the code and technical work behind the results.</h2></div>
-      <div><a class="button button--light" href={profile.github} target="_blank" rel="noreferrer">View GitHub ↗</a></div>
+      <div>
+        <p class="eyebrow" data-i18n data-en="Connect" data-ko="연결">Connect</p>
+        <h2
+          data-i18n
+          data-en="Explore the code and technical work behind the results."
+          data-ko="성과 뒤의 코드와 기술적 구현을 확인할 수 있습니다."
+        >Explore the code and technical work behind the results.</h2>
+      </div>
+      <div>
+        <a class="button button--light" href={profile.github} target="_blank" rel="noreferrer">
+          <span data-i18n data-en="View GitHub" data-ko="GitHub 보기">View GitHub</span> ↗
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -1,19 +1,19 @@
 ---
 interface Props {
   eyebrow: string;
+  eyebrowKo: string;
   title: string;
+  titleKo: string;
   intro: string;
-  index?: string;
+  introKo: string;
 }
 
-const { eyebrow, title, intro, index = '01' } = Astro.props;
+const { eyebrow, eyebrowKo, title, titleKo, intro, introKo } = Astro.props;
 ---
 
 <section class="page-hero shell">
-  <div class="page-index" aria-hidden="true">{index}</div>
-  <div class="page-hero-copy">
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>{title}</h1>
-    <p>{intro}</p>
-  </div>
+  <p class="eyebrow" data-i18n data-en={eyebrow} data-ko={eyebrowKo}>{eyebrow}</p>
+  <h1 data-i18n data-en={title} data-ko={titleKo}>{title}</h1>
+  <p data-i18n data-en={intro} data-ko={introKo}>{intro}</p>
 </section>
+

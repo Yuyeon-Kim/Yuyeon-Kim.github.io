@@ -9,13 +9,17 @@ import { projects } from '@/data/portfolio';
 <BaseLayout
   page="projects"
   title="Projects · Yuyeon Kim"
+  titleKo="프로젝트 · 김유연"
   description="Case studies across medical AI, data science, computer vision, robotics, 3D data, and semiconductor process optimization."
+  descriptionKo="의료 AI, 데이터 사이언스, 컴퓨터 비전, 로보틱스, 3D 데이터 및 반도체 공정 최적화 프로젝트."
 >
   <PageHero
-    index="01"
     eyebrow="Project database"
+    eyebrowKo="프로젝트 데이터베이스"
     title="Evidence, not a list of technologies."
+    titleKo="기술 목록이 아니라 문제 해결의 근거."
     intro="Every case follows the same spine: problem, constraint, decision, implementation, result, and what changed in my next approach. Choose a recruiter view to focus the database."
+    introKo="모든 프로젝트를 문제, 제약, 판단, 구현, 결과, 그리고 다음 접근에 반영한 원칙의 흐름으로 정리했습니다. 원하는 관점을 선택해 관련 프로젝트에 집중할 수 있습니다."
   />
 
   <section class="switcher-band page-switcher">
@@ -24,11 +28,22 @@ import { projects } from '@/data/portfolio';
 
   <section class="shell section-space project-archive">
     <div class="archive-intro">
-      <p><span data-view-label>All experience</span> · <span data-view-count>{projects.length}</span> case studies</p>
-      <p>Training projects are explicitly labeled and separated from deployed or published work.</p>
+      <p>
+        <span data-view-label>All experience</span>
+        {' · '}
+        <span data-view-count>{projects.length}</span>
+        {' '}
+        <span data-i18n data-en="case studies" data-ko="프로젝트">case studies</span>
+      </p>
+      <p
+        data-i18n
+        data-en="Training projects are explicitly labeled and separated from deployed or published work."
+        data-ko="교육·실습 프로젝트는 배포·상용화·논문 성과와 명확히 구분했습니다."
+      >Training projects are explicitly labeled and separated from deployed or published work.</p>
     </div>
     <div class="project-grid archive-grid">
       {projects.map((project, index) => <ProjectCard project={project} index={index} filter />)}
     </div>
   </section>
 </BaseLayout>
+

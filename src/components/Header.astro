@@ -7,37 +7,81 @@ interface Props {
 
 const { currentPage = '' } = Astro.props;
 const nav = [
-  { key: 'projects', label: 'Projects', href: '/projects/' },
-  { key: 'research', label: 'Research', href: '/research/' },
-  { key: 'experience', label: 'Experience', href: '/experience/' },
-  { key: 'about', label: 'About', href: '/about/' },
-  { key: 'resume', label: 'Resume', href: '/resume/' },
+  { key: 'projects', label: 'Projects', labelKo: '프로젝트', href: '/projects/' },
+  { key: 'research', label: 'Research', labelKo: '연구', href: '/research/' },
+  { key: 'experience', label: 'Experience', labelKo: '경력', href: '/experience/' },
+  { key: 'about', label: 'About', labelKo: '소개', href: '/about/' },
+  { key: 'resume', label: 'Resume', labelKo: '이력서', href: '/resume/' },
 ];
 ---
 
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href="/" data-preserve-view aria-label={`${profile.name}, home`}>
+    <a
+      class="brand"
+      href="/"
+      data-preserve-view
+      aria-label={`${profile.name}, home`}
+      data-i18n-aria-label
+      data-aria-en={`${profile.name}, home`}
+      data-aria-ko={`${profile.koreanName}, 홈`}
+    >
       <span class="brand-mark" aria-hidden="true">YK</span>
-      <span class="brand-name">{profile.name}</span>
+      <span class="brand-name" data-i18n data-en={profile.name} data-ko={profile.koreanName}>{profile.name}</span>
     </a>
 
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
-      <span class="sr-only">Toggle navigation</span>
-      <span></span><span></span>
-    </button>
+    <div class="header-controls">
+      <nav
+        id="site-nav"
+        class="site-nav"
+        data-mobile-menu
+        aria-label="Primary navigation"
+        data-i18n-aria-label
+        data-aria-en="Primary navigation"
+        data-aria-ko="주요 메뉴"
+      >
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            data-preserve-view
+            aria-current={currentPage === item.key ? 'page' : undefined}
+            data-i18n
+            data-en={item.label}
+            data-ko={item.labelKo}
+          >
+            {item.label}
+          </a>
+        ))}
+        <a class="nav-github" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
 
-    <nav id="site-nav" class="site-nav" data-mobile-menu aria-label="Primary navigation">
-      {nav.map((item) => (
-        <a
-          href={item.href}
-          data-preserve-view
-          aria-current={currentPage === item.key ? 'page' : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
-      <a class="nav-github" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-    </nav>
+      <div
+        class="language-switcher"
+        role="group"
+        aria-label="Choose language"
+        data-i18n-aria-label
+        data-aria-en="Choose language"
+        data-aria-ko="언어 선택"
+      >
+        <button type="button" data-language-option="en" aria-pressed="true">ENG</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-language-option="ko" aria-pressed="false">KOR</button>
+      </div>
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-menu-button
+        aria-label="Toggle navigation"
+        data-i18n-aria-label
+        data-aria-en="Toggle navigation"
+        data-aria-ko="메뉴 열기 또는 닫기"
+      >
+        <span></span><span></span>
+      </button>
+    </div>
+    <span class="sr-only" aria-live="polite" data-language-live></span>
   </div>
 </header>

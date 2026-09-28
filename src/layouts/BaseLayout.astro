@@ -5,13 +5,17 @@ import '@/styles/global.css';
 
 interface Props {
   title?: string;
+  titleKo?: string;
   description?: string;
+  descriptionKo?: string;
   page?: string;
 }
 
 const {
   title = 'Yuyeon Kim · AI Researcher & ML Engineer',
+  titleKo = '김유연 · AI 연구자 & ML 엔지니어',
   description = 'Portfolio of Yuyeon Kim: medical AI, data science, computer vision, robotics, and semiconductor process optimization.',
+  descriptionKo = '김유연의 포트폴리오: 의료 AI, 데이터 사이언스, 컴퓨터 비전, 로보틱스, 반도체 공정 최적화.',
   page = '',
 } = Astro.props;
 
@@ -19,22 +23,36 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-language="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
+    <meta name="description" content={description} data-en={description} data-ko={descriptionKo} />
     <meta name="theme-color" content="#0b1220" />
     <meta name="color-scheme" content="light" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <title data-en={title} data-ko={titleKo}>{title}</title>
     <script is:inline>
       document.documentElement.classList.add('js');
+      try {
+        const savedLanguage = localStorage.getItem('portfolio-language');
+        const language = savedLanguage === 'ko' ? 'ko' : 'en';
+        document.documentElement.dataset.language = language;
+        document.documentElement.lang = language === 'ko' ? 'ko' : 'en';
+      } catch {
+        document.documentElement.dataset.language = 'en';
+      }
     </script>
   </head>
   <body data-page={page}>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a
+      class="skip-link"
+      href="#main-content"
+      data-i18n
+      data-en="Skip to content"
+      data-ko="본문으로 건너뛰기"
+    >Skip to content</a>
     <Header currentPage={page} />
     <main id="main-content">
       <slot />
@@ -43,6 +61,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
     <script is:inline>
       const validViews = ['all', 'research', 'data', 'semiconductor', 'robotics'];
+      const validLanguages = ['en', 'ko'];
+
+      function currentLanguage() {
+        try {
+          const saved = localStorage.getItem('portfolio-language');
+          return validLanguages.includes(saved) ? saved : 'en';
+        } catch {
+          return 'en';
+        }
+      }
 
       function currentView() {
         const view = new URLSearchParams(window.location.search).get('view') || 'all';
@@ -58,7 +86,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         });
       }
 
+      function viewName(view, language) {
+        const active = document.querySelector(`[data-view-option="${view}"]`);
+        return active?.getAttribute(`data-view-name-${language}`) ||
+          (language === 'ko' ? '전체 경험' : 'All experience');
+      }
+
       function applyView(view, announce = false) {
+        const language = document.documentElement.dataset.language || 'en';
         document.documentElement.dataset.view = view;
         document.querySelectorAll('[data-view-option]').forEach((button) => {
           const active = button.dataset.viewOption === view;
@@ -81,17 +116,65 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         });
 
         document.querySelectorAll('[data-view-label]').forEach((label) => {
-          const active = document.querySelector(`[data-view-option="${view}"]`);
-          label.textContent = active?.dataset.viewName || 'All experience';
+          label.textContent = viewName(view, language);
         });
 
         updateInternalLinks(view);
         if (announce) {
           const live = document.querySelector('[data-view-live]');
           if (live) {
-            const viewName = document.querySelector(`[data-view-option="${view}"]`)?.dataset.viewName || 'All experience';
-            const countText = visibleFilterItems > 0 ? ` ${visibleFilterItems} matching items shown.` : '';
-            live.textContent = `Portfolio view changed to ${viewName}.${countText}`;
+            const name = viewName(view, language);
+            if (language === 'ko') {
+              const countText = visibleFilterItems > 0 ? ` 일치하는 항목 ${visibleFilterItems}개를 표시합니다.` : '';
+              live.textContent = `포트폴리오 관점을 ${name}(으)로 변경했습니다.${countText}`;
+            } else {
+              const countText = visibleFilterItems > 0 ? ` ${visibleFilterItems} matching items shown.` : '';
+              live.textContent = `Portfolio view changed to ${name}.${countText}`;
+            }
+          }
+        }
+      }
+
+      function applyLanguage(language, announce = false) {
+        const nextLanguage = validLanguages.includes(language) ? language : 'en';
+        document.documentElement.dataset.language = nextLanguage;
+        document.documentElement.lang = nextLanguage === 'ko' ? 'ko' : 'en';
+        try {
+          localStorage.setItem('portfolio-language', nextLanguage);
+        } catch {}
+
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+          const value = element.getAttribute(`data-${nextLanguage}`);
+          if (value !== null) element.textContent = value;
+        });
+        document.querySelectorAll('[data-i18n-aria-label]').forEach((element) => {
+          const value = element.getAttribute(`data-aria-${nextLanguage}`);
+          if (value !== null) element.setAttribute('aria-label', value);
+        });
+        document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
+          const value = element.getAttribute(`data-alt-${nextLanguage}`);
+          if (value !== null) element.setAttribute('alt', value);
+        });
+        document.querySelectorAll('[data-language-option]').forEach((button) => {
+          const active = button.dataset.languageOption === nextLanguage;
+          button.setAttribute('aria-pressed', String(active));
+          button.classList.toggle('is-active', active);
+        });
+
+        const title = document.querySelector('title');
+        const localizedTitle = title?.getAttribute(`data-${nextLanguage}`);
+        if (localizedTitle) document.title = localizedTitle;
+        const description = document.querySelector('meta[name="description"]');
+        const localizedDescription = description?.getAttribute(`data-${nextLanguage}`);
+        if (localizedDescription) description.setAttribute('content', localizedDescription);
+
+        applyView(currentView());
+        if (announce) {
+          const live = document.querySelector('[data-language-live]');
+          if (live) {
+            live.textContent = nextLanguage === 'ko'
+              ? '사이트 언어를 한국어로 변경했습니다.'
+              : 'Site language changed to English.';
           }
         }
       }
@@ -104,6 +187,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           else url.searchParams.set('view', view);
           history.replaceState({}, '', url);
           applyView(view, true);
+        });
+      });
+
+      document.querySelectorAll('[data-language-option]').forEach((button) => {
+        button.addEventListener('click', () => {
+          applyLanguage(button.dataset.languageOption, true);
         });
       });
 
@@ -136,8 +225,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         });
       }
 
-      applyView(currentView());
+      applyLanguage(currentLanguage());
       window.addEventListener('popstate', () => applyView(currentView()));
     </script>
   </body>
 </html>
+

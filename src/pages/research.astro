@@ -2,47 +2,96 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/PageHero.astro';
 import { publications } from '@/data/portfolio';
+import { publicationsKo } from '@/data/portfolio-ko';
 ---
 
 <BaseLayout
   page="research"
   title="Research & Publications · Yuyeon Kim"
+  titleKo="연구 & 논문 · 김유연"
   description="Publications and research collaborations in medical imaging, 3D surface reconstruction, computer vision, and edge AI."
+  descriptionKo="의료영상, 3D 표면 복원, 컴퓨터 비전 및 엣지 AI 분야의 논문과 공동연구."
 >
   <PageHero
-    index="02"
     eyebrow="Research & publications"
+    eyebrowKo="연구 & 논문"
     title="Geometry, imaging, and models that survive scrutiny."
+    titleKo="검증을 견디는 형상, 영상, 그리고 모델."
     intro="My research moves between representation design, statistical validation, and engineering constraints. Publication status and authorship are stated explicitly."
+    introKo="표현 방식의 설계, 통계적 검증, 공학적 제약을 함께 다룹니다. 각 논문의 진행 상태와 저자 기여를 명확히 표기했습니다."
   />
 
   <section class="shell research-page section-space">
     <div class="publication-list">
-      {publications.map((publication, index) => (
-        <article class="publication-item">
-          <div class="publication-index">{String(index + 1).padStart(2, '0')}</div>
-          <div class="publication-year">{publication.year}</div>
-          <div class="publication-copy">
-            <div class="publication-status-row">
-              <span>{publication.status}</span>
-              <span>{publication.role}</span>
+      {publications.map((publication, index) => {
+        const ko = publicationsKo[index];
+        return (
+          <article class="publication-item">
+            <div class="publication-index">{String(index + 1).padStart(2, '0')}</div>
+            <div class="publication-year">{publication.year}</div>
+            <div class="publication-copy">
+              <div class="publication-status-row">
+                <span data-i18n data-en={publication.status} data-ko={ko.status}>{publication.status}</span>
+                <span data-i18n data-en={publication.role} data-ko={ko.role}>{publication.role}</span>
+              </div>
+              <h2>
+                {publication.href ? (
+                  <a href={publication.href} target="_blank" rel="noreferrer">
+                    <span data-i18n data-en={publication.title} data-ko={ko.title}>{publication.title}</span> ↗
+                  </a>
+                ) : (
+                  <span data-i18n data-en={publication.title} data-ko={ko.title}>{publication.title}</span>
+                )}
+              </h2>
+              <p data-i18n data-en={publication.venue} data-ko={ko.venue}>{publication.venue}</p>
+              <div class="tag-list">
+                {publication.tags.map((tag, tagIndex) => (
+                  <span data-i18n data-en={tag} data-ko={ko.tags[tagIndex]}>{tag}</span>
+                ))}
+              </div>
             </div>
-            <h2>{publication.href ? <a href={publication.href} target="_blank" rel="noreferrer">{publication.title} ↗</a> : publication.title}</h2>
-            <p>{publication.venue}</p>
-            <div class="tag-list">{publication.tags.map((tag) => <span>{tag}</span>)}</div>
-          </div>
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
 
     <aside class="research-method">
-      <p class="eyebrow">Research method</p>
-      <h2>Three checks before a result becomes evidence.</h2>
+      <p class="eyebrow" data-i18n data-en="Research method" data-ko="연구 방법">Research method</p>
+      <h2
+        data-i18n
+        data-en="Three checks before a result becomes evidence."
+        data-ko="결과를 근거로 인정하기 전 확인하는 세 가지."
+      >Three checks before a result becomes evidence.</h2>
       <div class="method-grid">
-        <article><span>01</span><h3>Representation</h3><p>Does the chosen data structure preserve the anatomical or operational feature the question depends on?</p></article>
-        <article><span>02</span><h3>Failure modes</h3><p>Do geometry, topology, error cases, and excluded samples reveal where the method stops being trustworthy?</p></article>
-        <article><span>03</span><h3>Downstream value</h3><p>Does the improvement change a scientific conclusion, operating decision, or resource requirement?</p></article>
+        <article>
+          <span>01</span>
+          <h3 data-i18n data-en="Representation" data-ko="표현 방식">Representation</h3>
+          <p
+            data-i18n
+            data-en="Does the chosen data structure preserve the anatomical or operational feature the question depends on?"
+            data-ko="선택한 데이터 구조가 연구 질문에 필요한 해부학적 특징이나 운영 특성을 보존하는가?"
+          >Does the chosen data structure preserve the anatomical or operational feature the question depends on?</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3 data-i18n data-en="Failure modes" data-ko="실패 조건">Failure modes</h3>
+          <p
+            data-i18n
+            data-en="Do geometry, topology, error cases, and excluded samples reveal where the method stops being trustworthy?"
+            data-ko="기하, 위상, 오류 사례와 제외된 표본을 통해 방법을 신뢰할 수 없는 경계를 확인했는가?"
+          >Do geometry, topology, error cases, and excluded samples reveal where the method stops being trustworthy?</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3 data-i18n data-en="Downstream value" data-ko="후속 활용 가치">Downstream value</h3>
+          <p
+            data-i18n
+            data-en="Does the improvement change a scientific conclusion, operating decision, or resource requirement?"
+            data-ko="개선된 결과가 과학적 결론, 운영 의사결정 또는 자원 요구량을 실제로 바꾸는가?"
+          >Does the improvement change a scientific conclusion, operating decision, or resource requirement?</p>
+        </article>
       </div>
     </aside>
   </section>
 </BaseLayout>
+

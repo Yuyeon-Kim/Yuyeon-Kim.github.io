@@ -1,20 +1,42 @@
 ---
 interface Props {
   eyebrow: string;
+  eyebrowKo: string;
   title: string;
+  titleKo: string;
   intro?: string;
+  introKo?: string;
   href?: string;
   linkLabel?: string;
+  linkLabelKo?: string;
 }
 
-const { eyebrow, title, intro, href, linkLabel = 'View all' } = Astro.props;
+const {
+  eyebrow,
+  eyebrowKo,
+  title,
+  titleKo,
+  intro,
+  introKo = '',
+  href,
+  linkLabel = 'View all',
+  linkLabelKo = '전체 보기',
+} = Astro.props;
 ---
 
 <div class="section-heading">
   <div>
-    <p class="eyebrow">{eyebrow}</p>
-    <h2>{title}</h2>
-    {intro && <p class="section-intro">{intro}</p>}
+    <p class="eyebrow" data-i18n data-en={eyebrow} data-ko={eyebrowKo}>{eyebrow}</p>
+    <h2 data-i18n data-en={title} data-ko={titleKo}>{title}</h2>
   </div>
-  {href && <a class="text-link" href={href} data-preserve-view>{linkLabel} <span aria-hidden="true">↗</span></a>}
+  <div class="section-heading-aside">
+    {intro && <p data-i18n data-en={intro} data-ko={introKo}>{intro}</p>}
+    {href && (
+      <a href={href} data-preserve-view>
+        <span data-i18n data-en={linkLabel} data-ko={linkLabelKo}>{linkLabel}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    )}
+  </div>
 </div>
+

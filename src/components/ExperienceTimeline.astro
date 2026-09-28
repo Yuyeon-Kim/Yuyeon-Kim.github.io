@@ -1,5 +1,6 @@
 ---
 import { experiences } from '@/data/portfolio';
+import { experiencesKo } from '@/data/portfolio-ko';
 
 interface Props {
   full?: boolean;
@@ -10,22 +11,32 @@ const items = full ? experiences : experiences.slice(0, 4);
 ---
 
 <div class="timeline">
-  {items.map((item, index) => (
-    <article class="timeline-item" data-views={item.views.join(' ')} data-filter-item={full ? '' : undefined}>
-      <div class="timeline-marker" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
-      <p class="timeline-period">{item.period}</p>
-      <div class="timeline-content">
-        <div class="timeline-title-row">
-          <div>
-            <h3>{item.organization}</h3>
-            <p>{item.role}</p>
+  {items.map((item, index) => {
+    const ko = experiencesKo[index];
+    return (
+      <article class="timeline-item" data-views={item.views.join(' ')} data-filter-item={full ? '' : undefined}>
+        <div class="timeline-marker" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
+        <p class="timeline-period">{item.period}</p>
+        <div class="timeline-content">
+          <div class="timeline-title-row">
+            <div>
+              <h3 data-i18n data-en={item.organization} data-ko={ko.organization}>{item.organization}</h3>
+              <p data-i18n data-en={item.role} data-ko={ko.role}>{item.role}</p>
+            </div>
+            <span class="type-chip" data-i18n data-en={item.type} data-ko={ko.type}>{item.type}</span>
           </div>
-          <span class="type-chip">{item.type}</span>
+          <ul>
+            {item.highlights.map((highlight, highlightIndex) => (
+              <li
+                data-i18n
+                data-en={highlight}
+                data-ko={ko.highlights[highlightIndex]}
+              >{highlight}</li>
+            ))}
+          </ul>
         </div>
-        <ul>
-          {item.highlights.map((highlight) => <li>{highlight}</li>)}
-        </ul>
-      </div>
-    </article>
-  ))}
+      </article>
+    );
+  })}
 </div>
+

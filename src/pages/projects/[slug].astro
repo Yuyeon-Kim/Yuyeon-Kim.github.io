@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, type Project } from '@/data/portfolio';
+import { projectKoBySlug } from '@/data/portfolio-ko';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
@@ -12,10 +13,18 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const projectKo = projectKoBySlug(project.slug)!;
 const displayDate = (date: string) => date.replaceAll('-', '.');
 const currentIndex = projects.findIndex((candidate) => candidate.slug === project.slug);
 const projectViews = new Set(project.views.filter((view) => view !== 'all'));
 const projectTags = new Set(project.tags.map((tag) => tag.toLowerCase()));
+const linkLabelsKo: Record<string, string> = {
+  Paper: '논문',
+  'Code preview': '코드 미리보기',
+  'POSTECH research highlight': 'POSTECH 연구 하이라이트',
+  Code: '코드',
+  'Related code': '관련 코드',
+};
 
 // Rank by meaningful overlap, then rotate ties from the current project so the
 // first projects in the data file do not dominate every recommendation.
@@ -44,83 +53,168 @@ const related = projects
 <BaseLayout
   page="projects"
   title={`${project.title} · Yuyeon Kim`}
+  titleKo={`${projectKo.title} · 김유연`}
   description={project.summary}
+  descriptionKo={projectKo.summary}
 >
   <article class="case-study">
     <header class="case-hero shell">
       <div class="case-title-block">
-        <a class="back-link" href="/projects/" data-preserve-view>← All projects</a>
-        <p class="eyebrow">{project.eyebrow}</p>
-        <h1>{project.title}</h1>
-        <p class="case-deck">{project.summary}</p>
+        <a class="back-link" href="/projects/" data-preserve-view>
+          ← <span data-i18n data-en="All projects" data-ko="전체 프로젝트">All projects</span>
+        </a>
+        <p class="eyebrow" data-i18n data-en={project.eyebrow} data-ko={projectKo.eyebrow}>{project.eyebrow}</p>
+        <h1 data-i18n data-en={project.title} data-ko={projectKo.title}>{project.title}</h1>
+        <p class="case-deck" data-i18n data-en={project.summary} data-ko={projectKo.summary}>{project.summary}</p>
         <div class="case-contribution">
-          <p class="eyebrow">My Contribution</p>
-          <p>{project.contribution}</p>
+          <p class="eyebrow" data-i18n data-en="My Contribution" data-ko="내가 한 일">My Contribution</p>
+          <p data-i18n data-en={project.contribution} data-ko={projectKo.contribution}>{project.contribution}</p>
         </div>
         <div class="case-meta">
-          <span><b>Start date</b><time datetime={project.startDate}>{displayDate(project.startDate)}</time></span>
-          <span><b>End date</b><time datetime={project.endDate}>{displayDate(project.endDate)}</time></span>
-          <span><b>Context</b>{project.organization}</span>
+          <span>
+            <b data-i18n data-en="Start date" data-ko="시작일">Start date</b>
+            <time datetime={project.startDate}>{displayDate(project.startDate)}</time>
+          </span>
+          <span>
+            <b data-i18n data-en="End date" data-ko="종료일">End date</b>
+            <time datetime={project.endDate}>{displayDate(project.endDate)}</time>
+          </span>
+          <span>
+            <b data-i18n data-en="Context" data-ko="소속 · 배경">Context</b>
+            <span data-i18n data-en={project.organization} data-ko={projectKo.organization}>{project.organization}</span>
+          </span>
         </div>
       </div>
-      <aside class="case-results" aria-label="Key results">
-        <p class="eyebrow">Key results</p>
-        {project.metrics.map((metric) => (
-          <div><strong>{metric.value}</strong><span>{metric.label}</span></div>
+      <aside
+        class="case-results"
+        aria-label="Key results"
+        data-i18n-aria-label
+        data-aria-en="Key results"
+        data-aria-ko="주요 성과"
+      >
+        <p class="eyebrow" data-i18n data-en="Key results" data-ko="주요 성과">Key results</p>
+        {project.metrics.map((metric, index) => (
+          <div>
+            <strong data-i18n data-en={metric.value} data-ko={projectKo.metrics[index].value}>{metric.value}</strong>
+            <span data-i18n data-en={metric.label} data-ko={projectKo.metrics[index].label}>{metric.label}</span>
+          </div>
         ))}
       </aside>
     </header>
 
     {project.image && (
       <div class="case-image-wrap shell">
-        <img src={project.image} alt={project.imageAlt || ''} />
+        <img
+          src={project.image}
+          alt={project.imageAlt || ''}
+          data-i18n-alt
+          data-alt-en={project.imageAlt || ''}
+          data-alt-ko={projectKo.imageAlt}
+        />
       </div>
     )}
 
     <div class="case-body shell">
       <aside class="case-nav">
-        <p class="eyebrow">Case outline</p>
-        <a href="#problem">01 · Problem</a>
-        <a href="#difficulty">02 · Why difficult</a>
-        <a href="#approach">03 · First approach</a>
-        <a href="#decision">04 · Decision</a>
-        <a href="#implementation">05 · Implementation</a>
-        <a href="#result">06 · Result</a>
-        <a href="#learning">07 · Learning</a>
+        <p class="eyebrow" data-i18n data-en="Case outline" data-ko="구성">Case outline</p>
+        <a href="#problem">01 · <span data-i18n data-en="Problem" data-ko="문제">Problem</span></a>
+        <a href="#difficulty">02 · <span data-i18n data-en="Why difficult" data-ko="난점">Why difficult</span></a>
+        <a href="#approach">03 · <span data-i18n data-en="First approach" data-ko="초기 접근">First approach</span></a>
+        <a href="#decision">04 · <span data-i18n data-en="Decision" data-ko="판단">Decision</span></a>
+        <a href="#implementation">05 · <span data-i18n data-en="Implementation" data-ko="구현">Implementation</span></a>
+        <a href="#result">06 · <span data-i18n data-en="Result" data-ko="결과">Result</span></a>
+        <a href="#learning">07 · <span data-i18n data-en="Learning" data-ko="배운 점">Learning</span></a>
       </aside>
 
       <div class="case-sections">
-        <section id="problem"><span>01</span><p class="eyebrow">Problem</p><h2>What had to change?</h2><p>{project.problem}</p></section>
-        <section id="difficulty"><span>02</span><p class="eyebrow">Why it was difficult</p><h2>The constraint behind the metric.</h2><p>{project.difficulty}</p></section>
-        <section id="approach"><span>03</span><p class="eyebrow">First approach</p><h2>Make the failure measurable.</h2><p>{project.firstApproach}</p></section>
-        <section id="decision"><span>04</span><p class="eyebrow">Decision</p><h2>Choose the right unit of work.</h2><p>{project.decision}</p></section>
-        <section id="implementation"><span>05</span><p class="eyebrow">Implementation</p><h2>Connect the method to the system.</h2><p>{project.implementation}</p></section>
+        <section id="problem">
+          <span>01</span>
+          <p class="eyebrow" data-i18n data-en="Problem" data-ko="문제">Problem</p>
+          <h2 data-i18n data-en="What had to change?" data-ko="무엇을 바꿔야 했는가?">What had to change?</h2>
+          <p data-i18n data-en={project.problem} data-ko={projectKo.problem}>{project.problem}</p>
+        </section>
+        <section id="difficulty">
+          <span>02</span>
+          <p class="eyebrow" data-i18n data-en="Why it was difficult" data-ko="난점">Why it was difficult</p>
+          <h2 data-i18n data-en="The constraint behind the metric." data-ko="성과 지표 뒤의 제약.">The constraint behind the metric.</h2>
+          <p data-i18n data-en={project.difficulty} data-ko={projectKo.difficulty}>{project.difficulty}</p>
+        </section>
+        <section id="approach">
+          <span>03</span>
+          <p class="eyebrow" data-i18n data-en="First approach" data-ko="초기 접근">First approach</p>
+          <h2 data-i18n data-en="Make the failure measurable." data-ko="실패 원인을 측정 가능한 문제로 정의했습니다.">Make the failure measurable.</h2>
+          <p data-i18n data-en={project.firstApproach} data-ko={projectKo.firstApproach}>{project.firstApproach}</p>
+        </section>
+        <section id="decision">
+          <span>04</span>
+          <p class="eyebrow" data-i18n data-en="Decision" data-ko="판단">Decision</p>
+          <h2 data-i18n data-en="Choose the right unit of work." data-ko="적절한 해결 단위를 선택했습니다.">Choose the right unit of work.</h2>
+          <p data-i18n data-en={project.decision} data-ko={projectKo.decision}>{project.decision}</p>
+        </section>
+        <section id="implementation">
+          <span>05</span>
+          <p class="eyebrow" data-i18n data-en="Implementation" data-ko="구현">Implementation</p>
+          <h2 data-i18n data-en="Connect the method to the system." data-ko="방법을 실제 시스템으로 연결했습니다.">Connect the method to the system.</h2>
+          <p data-i18n data-en={project.implementation} data-ko={projectKo.implementation}>{project.implementation}</p>
+        </section>
         <section id="result" class="case-result-section">
-          <span>06</span><p class="eyebrow">Result</p><h2>Measured outcome.</h2><p>{project.result}</p>
+          <span>06</span>
+          <p class="eyebrow" data-i18n data-en="Result" data-ko="결과">Result</p>
+          <h2 data-i18n data-en="Measured outcome." data-ko="수치로 확인한 성과.">Measured outcome.</h2>
+          <p data-i18n data-en={project.result} data-ko={projectKo.result}>{project.result}</p>
           <div class="case-metric-grid">
-            {project.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}
+            {project.metrics.map((metric, index) => (
+              <div>
+                <strong data-i18n data-en={metric.value} data-ko={projectKo.metrics[index].value}>{metric.value}</strong>
+                <span data-i18n data-en={metric.label} data-ko={projectKo.metrics[index].label}>{metric.label}</span>
+              </div>
+            ))}
           </div>
         </section>
-        <section id="learning"><span>07</span><p class="eyebrow">What I learned</p><h2>How this changed my next decision.</h2><p>{project.learned}</p></section>
+        <section id="learning">
+          <span>07</span>
+          <p class="eyebrow" data-i18n data-en="What I learned" data-ko="배운 점">What I learned</p>
+          <h2 data-i18n data-en="How this changed my next decision." data-ko="다음 판단에 적용한 원칙.">How this changed my next decision.</h2>
+          <p data-i18n data-en={project.learned} data-ko={projectKo.learned}>{project.learned}</p>
+        </section>
       </div>
     </div>
 
     <section class="case-tools shell">
       <div>
-        <p class="eyebrow">Tools & methods</p>
-        <div class="large-tags">{project.tags.map((tag) => <span>{tag}</span>)}</div>
+        <p class="eyebrow" data-i18n data-en="Tools & methods" data-ko="기술 및 방법">Tools & methods</p>
+        <div class="large-tags">
+          {project.tags.map((tag, index) => (
+            <span data-i18n data-en={tag} data-ko={projectKo.tags[index]}>{tag}</span>
+          ))}
+        </div>
       </div>
       {project.links && project.links.length > 0 && (
         <div class="case-links">
-          <p class="eyebrow">External links</p>
-          {project.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</a>)}
+          <p class="eyebrow" data-i18n data-en="External links" data-ko="외부 링크">External links</p>
+          {project.links.map((link) => (
+            <a href={link.href} target="_blank" rel="noreferrer">
+              <span
+                data-i18n
+                data-en={link.label}
+                data-ko={linkLabelsKo[link.label] || link.label}
+              >{link.label}</span> ↗
+            </a>
+          ))}
         </div>
       )}
     </section>
 
     <section class="related-projects shell section-space">
-      <div class="section-heading compact-heading"><div><p class="eyebrow">Continue</p><h2>Related work</h2></div></div>
-      <div class="project-grid">{related.map((item, index) => <ProjectCard project={item} index={index} />)}</div>
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow" data-i18n data-en="Continue" data-ko="이어보기">Continue</p>
+          <h2 data-i18n data-en="Related work" data-ko="관련 프로젝트">Related work</h2>
+        </div>
+      </div>
+      <div class="project-grid">
+        {related.map((item, index) => <ProjectCard project={item} index={index} />)}
+      </div>
     </section>
   </article>
 </BaseLayout>

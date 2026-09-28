@@ -1,85 +1,142 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { profile, education, experiences, publications, awards, certifications, skillGroups } from '@/data/portfolio';
+import {
+  profileKo,
+  educationKo,
+  experiencesKo,
+  publicationsKo,
+  awardsKo,
+  certificationsKo,
+  skillGroupsKo,
+} from '@/data/portfolio-ko';
 ---
 
 <BaseLayout
   page="resume"
   title="Resume · Yuyeon Kim"
+  titleKo="이력서 · 김유연"
   description="Public resume for Yuyeon Kim, AI researcher and machine learning engineer."
+  descriptionKo="AI 연구자이자 머신러닝 엔지니어 김유연의 공개 이력서."
 >
   <section class="resume-actions shell">
-    <a href="/" data-preserve-view>← Portfolio</a>
-    <button type="button" onclick="window.print()">Print / Save as PDF</button>
+    <a href="/" data-preserve-view>← <span data-i18n data-en="Portfolio" data-ko="포트폴리오">Portfolio</span></a>
+    <button type="button" onclick="window.print()" data-i18n data-en="Print / Save as PDF" data-ko="인쇄 / PDF 저장">Print / Save as PDF</button>
   </section>
 
   <article class="resume-sheet">
     <header class="resume-header">
       <div>
-        <p class="eyebrow">AI Researcher · ML Engineer</p>
-        <h1>{profile.name}</h1>
-        <p>{profile.summary}</p>
+        <p class="eyebrow" data-i18n data-en="AI Researcher · ML Engineer" data-ko="AI 연구자 · ML 엔지니어">AI Researcher · ML Engineer</p>
+        <h1 data-i18n data-en={profile.name} data-ko={profile.koreanName}>{profile.name}</h1>
+        <p data-i18n data-en={profile.summary} data-ko={profileKo.summary}>{profile.summary}</p>
       </div>
       <address>
-        <span>{profile.location}</span>
+        <span data-i18n data-en={profile.location} data-ko={profileKo.location}>{profile.location}</span>
         <a href={profile.github} target="_blank" rel="noreferrer">github.com/Yuyeon-Kim</a>
         <a href="https://yuyeon-kim.github.io">yuyeon-kim.github.io</a>
       </address>
     </header>
 
     <section class="resume-section">
-      <h2>Selected outcomes</h2>
+      <h2 data-i18n data-en="Selected outcomes" data-ko="주요 성과">Selected outcomes</h2>
       <div class="resume-outcomes">
-        <div><strong>32% ↓</strong><span>hippocampal sulcus error</span></div>
-        <div><strong>90% ↓</strong><span>3D mesh processing time</span></div>
-        <div><strong>99.85% ↓</strong><span>teacher-to-student model size</span></div>
-        <div><strong>CES 2024</strong><span>smart-farm AI exhibition</span></div>
+        <div><strong>32% ↓</strong><span data-i18n data-en="hippocampal sulcus error" data-ko="해마 고랑 오차">hippocampal sulcus error</span></div>
+        <div><strong>90% ↓</strong><span data-i18n data-en="3D mesh processing time" data-ko="3D 메쉬 처리 시간">3D mesh processing time</span></div>
+        <div><strong>99.85% ↓</strong><span data-i18n data-en="teacher-to-student model size" data-ko="Teacher 대비 Student 모델 크기">teacher-to-student model size</span></div>
+        <div><strong>CES 2024</strong><span data-i18n data-en="smart-farm AI exhibition" data-ko="스마트팜 AI 전시">smart-farm AI exhibition</span></div>
       </div>
     </section>
 
     <section class="resume-section resume-two-column">
       <div>
-        <h2>Experience</h2>
+        <h2 data-i18n data-en="Experience" data-ko="경력">Experience</h2>
         <div class="resume-records">
-          {experiences.slice(0, 4).map((item) => (
+          {experiences.slice(0, 4).map((item, index) => (
             <article>
               <span>{item.period}</span>
-              <h3>{item.organization}</h3>
-              <p class="resume-role">{item.role}</p>
-              <ul>{item.highlights.slice(0, 2).map((highlight) => <li>{highlight}</li>)}</ul>
+              <h3 data-i18n data-en={item.organization} data-ko={experiencesKo[index].organization}>{item.organization}</h3>
+              <p class="resume-role" data-i18n data-en={item.role} data-ko={experiencesKo[index].role}>{item.role}</p>
+              <ul>
+                {item.highlights.slice(0, 2).map((highlight, highlightIndex) => (
+                  <li data-i18n data-en={highlight} data-ko={experiencesKo[index].highlights[highlightIndex]}>{highlight}</li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>
       </div>
       <aside>
-        <h2>Education</h2>
+        <h2 data-i18n data-en="Education" data-ko="학력">Education</h2>
         <div class="resume-records compact">
-          {education.map((item) => <article><span>{item.period}</span><h3>{item.institution}</h3><p class="resume-role">{item.degree}</p><p>{item.detail}</p></article>)}
+          {education.map((item, index) => (
+            <article>
+              <span>{item.period}</span>
+              <h3 data-i18n data-en={item.institution} data-ko={educationKo[index].institution}>{item.institution}</h3>
+              <p class="resume-role" data-i18n data-en={item.degree} data-ko={educationKo[index].degree}>{item.degree}</p>
+              <p data-i18n data-en={item.detail} data-ko={educationKo[index].detail}>{item.detail}</p>
+            </article>
+          ))}
         </div>
-        <h2>Recognition</h2>
+        <h2 data-i18n data-en="Recognition" data-ko="수상">Recognition</h2>
         <ul class="resume-simple-list">
-          {awards.slice(0, 4).map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}
+          {awards.slice(0, 4).map((item, index) => (
+            <li>
+              <span>{item.year}</span>
+              <strong data-i18n data-en={item.title} data-ko={awardsKo[index].title}>{item.title}</strong>
+              <em data-i18n data-en={item.issuer} data-ko={awardsKo[index].issuer}>{item.issuer}</em>
+            </li>
+          ))}
         </ul>
       </aside>
     </section>
 
     <section class="resume-section">
-      <h2>Publications</h2>
+      <h2 data-i18n data-en="Publications" data-ko="논문">Publications</h2>
       <ol class="resume-publications">
-        {publications.map((publication) => (
-          <li><span>{publication.year}</span><div><strong>{publication.title}</strong><p>{publication.venue} · {publication.role} · {publication.status}</p></div></li>
+        {publications.map((publication, index) => (
+          <li>
+            <span>{publication.year}</span>
+            <div>
+              <strong data-i18n data-en={publication.title} data-ko={publicationsKo[index].title}>{publication.title}</strong>
+              <p>
+                <span data-i18n data-en={publication.venue} data-ko={publicationsKo[index].venue}>{publication.venue}</span>
+                {' · '}
+                <span data-i18n data-en={publication.role} data-ko={publicationsKo[index].role}>{publication.role}</span>
+                {' · '}
+                <span data-i18n data-en={publication.status} data-ko={publicationsKo[index].status}>{publication.status}</span>
+              </p>
+            </div>
+          </li>
         ))}
       </ol>
     </section>
 
     <section class="resume-section resume-two-column skills-resume-grid">
       <div>
-        <h2>Technical evidence</h2>
-        {skillGroups.map((group) => <p class="resume-skill-line"><strong>{group.title}</strong><span>{group.items.map((item) => item.name).join(' · ')}</span></p>)}
+        <h2 data-i18n data-en="Technical evidence" data-ko="기술 근거">Technical evidence</h2>
+        {skillGroups.map((group, index) => (
+          <p class="resume-skill-line">
+            <strong data-i18n data-en={group.title} data-ko={skillGroupsKo[index].title}>{group.title}</strong>
+            <span
+              data-i18n
+              data-en={group.items.map((item) => item.name).join(' · ')}
+              data-ko={skillGroupsKo[index].items.map((item) => item.name).join(' · ')}
+            >{group.items.map((item) => item.name).join(' · ')}</span>
+          </p>
+        ))}
       </div>
       <aside>
-        <h2>Selected credentials</h2>
-        <ul class="resume-simple-list">{certifications.slice(0, 5).map((item) => <li><span>{item.year}</span><strong>{item.title}</strong><em>{item.issuer}</em></li>)}</ul>
+        <h2 data-i18n data-en="Selected credentials" data-ko="주요 자격">Selected credentials</h2>
+        <ul class="resume-simple-list">
+          {certifications.slice(0, 5).map((item, index) => (
+            <li>
+              <span>{item.year}</span>
+              <strong data-i18n data-en={item.title} data-ko={certificationsKo[index].title}>{item.title}</strong>
+              <em data-i18n data-en={item.issuer} data-ko={certificationsKo[index].issuer}>{item.issuer}</em>
+            </li>
+          ))}
+        </ul>
       </aside>
     </section>
   </article>

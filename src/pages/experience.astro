@@ -8,38 +8,71 @@ import ExperienceTimeline from '@/components/ExperienceTimeline.astro';
 <BaseLayout
   page="experience"
   title="Experience · Yuyeon Kim"
+  titleKo="경력 · 김유연"
   description="Research, industry collaboration, robotics, teaching, operations, and early work experience."
+  descriptionKo="연구, 산업 공동연구, 로보틱스, 교육, 운영 및 초기 실무 경험."
 >
   <PageHero
-    index="03"
     eyebrow="Full career archive"
+    eyebrowKo="전체 경력"
     title="The visible result and the work behind it."
+    titleKo="보이는 결과와 그 결과를 만든 과정."
     intro="Research is the center of the portfolio, but the complete timeline also preserves teaching, operations, labeling, and customer-facing work that shaped how I deliver."
+    introKo="연구를 중심에 두되, 일하는 방식을 만든 교육, 운영, 라벨링, 고객 응대 경험까지 전체 타임라인에 함께 담았습니다."
   />
 
   <section class="switcher-band page-switcher"><div class="shell"><ViewSwitcher compact /></div></section>
 
   <section class="shell section-space experience-page">
     <div class="archive-intro">
-      <p><span data-view-label>All experience</span> · chronological view</p>
-      <p>Use All to reveal the early-career archive.</p>
+      <p>
+        <span data-view-label>All experience</span>
+        {' · '}
+        <span data-i18n data-en="chronological view" data-ko="시간순">chronological view</span>
+      </p>
+      <p
+        data-i18n
+        data-en="Use All to reveal the early-career archive."
+        data-ko="전체를 선택하면 초기 경력까지 모두 확인할 수 있습니다."
+      >Use All to reveal the early-career archive.</p>
     </div>
     <ExperienceTimeline full />
 
     <div class="operations-grid">
       <article>
-        <p class="eyebrow">Teaching</p>
-        <h2>Translate complexity without lowering the standard.</h2>
+        <p class="eyebrow" data-i18n data-en="Teaching" data-ko="교육">Teaching</p>
+        <h2
+          data-i18n
+          data-en="Translate complexity without lowering the standard."
+          data-ko="수준을 낮추지 않고 복잡한 내용을 전달했습니다."
+        >Translate complexity without lowering the standard.</h2>
         <ul>
-          <li><b>Data Structures TA</b><span>POSTECH · 2025</span></li>
-          <li><b>Youth AI Big Data TA</b><span>POSTECH · 2024</span></li>
-          <li><b>Data Structures & Algorithms TA</b><span>Dongguk · 2023–2024</span></li>
+          <li>
+            <b data-i18n data-en="Data Structures TA" data-ko="자료구조 조교">Data Structures TA</b>
+            <span>POSTECH · 2025</span>
+          </li>
+          <li>
+            <b data-i18n data-en="Youth AI Big Data TA" data-ko="청소년 AI·빅데이터 조교">Youth AI Big Data TA</b>
+            <span>POSTECH · 2024</span>
+          </li>
+          <li>
+            <b data-i18n data-en="Data Structures & Algorithms TA" data-ko="자료구조·알고리즘 조교">Data Structures & Algorithms TA</b>
+            <span data-i18n data-en="Dongguk · 2023–2024" data-ko="동국대학교 · 2023–2024">Dongguk · 2023–2024</span>
+          </li>
         </ul>
       </article>
       <article>
-        <p class="eyebrow">Research operations</p>
-        <h2>Automate the handoff, then document the exception.</h2>
-        <p>As lab manager, I automated recurring cleaning and calendar notices with Slack and built a Notion + ChatGPT handoff workflow that became the lab’s operating pipeline.</p>
+        <p class="eyebrow" data-i18n data-en="Research operations" data-ko="연구실 운영">Research operations</p>
+        <h2
+          data-i18n
+          data-en="Automate the handoff, then document the exception."
+          data-ko="반복 업무는 자동화하고 예외 상황은 문서화했습니다."
+        >Automate the handoff, then document the exception.</h2>
+        <p
+          data-i18n
+          data-en="As lab manager, I automated recurring cleaning and calendar notices with Slack and built a Notion + ChatGPT handoff workflow that became the lab’s operating pipeline."
+          data-ko="연구실 관리자로서 Slack을 이용해 정기 청소와 일정 공지를 자동화하고, Notion과 ChatGPT를 연결한 인수인계 흐름을 연구실 운영 체계로 정착시켰습니다."
+        >As lab manager, I automated recurring cleaning and calendar notices with Slack and built a Notion + ChatGPT handoff workflow that became the lab’s operating pipeline.</p>
       </article>
     </div>
   </section>

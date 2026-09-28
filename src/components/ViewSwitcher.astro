@@ -1,5 +1,6 @@
 ---
 import { views } from '@/data/portfolio';
+import { viewsKo } from '@/data/portfolio-ko';
 
 interface Props {
   compact?: boolean;
@@ -8,18 +9,35 @@ interface Props {
 const { compact = false } = Astro.props;
 ---
 
-<div class:list={['view-switcher', { compact }]} aria-label="Recruiter view">
+<div
+  class:list={['view-switcher', { compact }]}
+  aria-label="Recruiter view"
+  data-i18n-aria-label
+  data-aria-en="Recruiter view"
+  data-aria-ko="포트폴리오 관점 필터"
+>
   <div class="view-switcher-label">
-    <span class="eyebrow">View as</span>
+    <span class="eyebrow" data-i18n data-en="View as" data-ko="관점 선택">View as</span>
     <strong data-view-label>All experience</strong>
   </div>
-  <div class="view-options" role="group" aria-label="Choose a portfolio perspective">
-    {views.map((view) => (
+  <div
+    class="view-options"
+    role="group"
+    aria-label="Choose a portfolio perspective"
+    data-i18n-aria-label
+    data-aria-en="Choose a portfolio perspective"
+    data-aria-ko="포트폴리오 관점 선택"
+  >
+    {views.map((view, index) => (
       <button
         type="button"
         data-view-option={view.key}
-        data-view-name={view.label}
+        data-view-name-en={view.label}
+        data-view-name-ko={viewsKo[index].label}
         aria-pressed={view.key === 'all' ? 'true' : 'false'}
+        data-i18n
+        data-en={view.shortLabel}
+        data-ko={viewsKo[index].shortLabel}
       >
         {view.shortLabel}
       </button>
@@ -27,3 +45,4 @@ const { compact = false } = Astro.props;
   </div>
   <span class="sr-only" aria-live="polite" data-view-live></span>
 </div>
+
