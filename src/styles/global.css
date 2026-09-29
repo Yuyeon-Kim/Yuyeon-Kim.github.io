@@ -1264,6 +1264,12 @@ html[data-language="ko"] [data-language-content="en"] {
   border-left: 3px solid var(--cobalt);
 }
 
+html[data-language="ko"] .case-study[data-editorial-ko] .case-title-block h1 {
+  font-size: clamp(2.6rem, 4.8vw, 4.8rem);
+  line-height: 1.18;
+  letter-spacing: -0.045em;
+}
+
 .case-contribution .eyebrow {
   margin: 0 0 7px;
   color: var(--cobalt-dark);
