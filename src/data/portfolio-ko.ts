@@ -1,5 +1,13 @@
 import type { ViewKey } from './portfolio';
 
+export interface ProjectSectionKo {
+  id: string;
+  title: string;
+  paragraphs?: string[];
+  bullets?: string[];
+  subsections?: { title: string; content: string }[];
+}
+
 export interface ProjectKo {
   slug: string;
   title: string;
@@ -17,6 +25,7 @@ export interface ProjectKo {
   metrics: { value: string; label: string }[];
   tags: string[];
   imageAlt: string;
+  sections?: ProjectSectionKo[];
 }
 
 export const profileKo = {
@@ -81,9 +90,9 @@ export const projectsKo: ProjectKo[] = [
     eyebrow: '3차원 데이터 · 병렬 처리 · KCC 2023',
     organization: '동국대학교 × VESTELLALAB',
     summary:
-      '약 3,800만 개의 주차장 포인트 클라우드를 객체별로 나누어 병렬 처리함으로써 메쉬 생성 시간을 약 90% 단축했다.',
+      '실내 주차장에서 수집한 약 3,800만 개의 포인트를 3차원 메쉬로 변환하는 산학협력 프로젝트입니다. 일반 사무용 워크스테이션에서도 처리할 수 있도록 데이터를 객체별로 나누고 메쉬 생성 작업을 병렬화했습니다.',
     contribution:
-      '프로젝트 리더이자 공동 제1저자로 객체별 처리 구조를 설계하고, 병렬 메쉬 생성, 스레드별 성능 비교, SECOND 차량 검출과 Unity 시각화를 구현했다.',
+      '프로젝트 리더이자 공동 제1저자로 참여했습니다. 객체별 처리 구조를 설계하고 병렬 메쉬 생성을 구현했으며, 스레드 수에 따른 성능 비교, SECOND 기반 차량 검출과 Unity 시각화 연결을 맡았습니다.',
     problem:
       '전체 포인트 클라우드를 한 번에 메쉬로 변환하면 처리 시간과 메모리 사용량이 급증해 일반 사무용 워크스테이션에서 실행하기 어려웠다.',
     difficulty:
@@ -101,10 +110,48 @@ export const projectsKo: ProjectKo[] = [
     metrics: [
       { value: '90% ↓', label: '메쉬 생성 시간' },
       { value: '3,800만', label: '포인트 수' },
-      { value: '3위', label: '논문경진대회' },
+      { value: '장려상', label: '논문경진대회' },
     ],
     tags: ['포인트 클라우드', 'DBSCAN', '병렬 처리', 'SECOND', 'Unity', 'Python'],
     imageAlt: 'DBSCAN 기반 객체 분할 전후의 포인트 클라우드 비교.',
+    sections: [
+      {
+        id: 'results',
+        title: '주요 결과',
+        bullets: [
+          '메쉬 생성 시간 약 90% 단축',
+          '제한된 메모리 환경에서도 실행할 수 있도록 처리 구조 개선',
+          'KCC 2023 공동 제1저자 논문 발표',
+          '학부생·주니어 논문경진대회 장려상 수상',
+        ],
+      },
+      {
+        id: 'background',
+        title: '개발 배경',
+        paragraphs: [
+          '수천만 개의 포인트를 한 번에 메쉬로 변환하면 처리 시간과 메모리 사용량이 크게 증가했습니다. 또한 주차장 시설물과 차량을 모두 같은 방식으로 메쉬화하면서 불필요한 연산이 발생했습니다.',
+          '이를 개선하기 위해 데이터를 객체 단위로 나누고, 각 객체를 독립적으로 처리할 수 있는 구조를 검토했습니다. 정적 시설물은 객체별로 메쉬를 생성하고, 차량은 검출 모델을 활용해 별도로 처리했습니다.',
+        ],
+      },
+      {
+        id: 'development',
+        title: '주요 개발 내용',
+        subsections: [
+          {
+            title: 'DBSCAN을 이용한 객체 분리',
+            content: '주차장 포인트 클라우드에 DBSCAN을 적용해 정적 객체를 분리했습니다. 분리한 데이터에는 포인트 보간을 적용하고, 각 객체를 독립적인 메쉬 생성 작업으로 구성했습니다.',
+          },
+          {
+            title: '객체별 병렬 처리와 성능 비교',
+            content: '전체 데이터를 한 번에 처리하는 방식, 객체별로 순차 처리하는 방식, 객체별 병렬 처리 방식을 비교했습니다. 스레드 수를 바꾸며 처리 시간과 메모리 사용량을 측정해 병렬화의 효과를 확인했습니다.',
+          },
+          {
+            title: '차량 검출과 Unity 시각화',
+            content: '차량은 SECOND 기반 3D 객체 검출로 별도 처리해 불필요한 메쉬 생성을 줄였습니다. 생성한 메쉬와 차량 검출 결과는 Unity 시각화 환경에 연결했습니다.',
+          },
+        ],
+      },
+    ],
   },
   {
     slug: 'smart-farm-vision-automation',

@@ -265,6 +265,11 @@ html[data-language="ko"] .eyebrow {
   text-transform: none;
 }
 
+html[data-language="en"] [data-language-content="ko"],
+html[data-language="ko"] [data-language-content="en"] {
+  display: none;
+}
+
 .menu-button {
   display: none;
   width: 42px;
@@ -1422,6 +1427,50 @@ html[data-language="ko"] .eyebrow {
 
 .case-result-section > p:nth-of-type(2) {
   color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.case-editorial h2 {
+  padding-right: 2rem;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.35;
+}
+
+.case-sections.case-editorial > section > p,
+.case-editorial .case-subsection p,
+.case-editorial ul {
+  margin: 22px 0 0;
+  color: var(--ink-soft);
+  font-size: 1.06rem;
+  line-height: 1.85;
+}
+
+.case-editorial ul {
+  display: grid;
+  gap: 12px;
+  padding-left: 1.2em;
+}
+
+.case-editorial .case-result-section ul {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.case-editorial .case-result-section > span:first-child {
+  top: 20px;
+  right: 24px;
+}
+
+.case-editorial .case-subsection {
+  margin-top: 32px;
+}
+
+.case-editorial .case-subsection h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.55;
+}
+
+.case-editorial .case-subsection p {
+  margin-top: 10px;
 }
 
 .case-metric-grid {

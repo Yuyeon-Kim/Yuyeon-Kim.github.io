@@ -114,7 +114,7 @@ const related = projects
       </div>
     )}
 
-    <div class="case-body shell">
+    <div class="case-body shell" data-language-content={projectKo.sections ? 'en' : undefined}>
       <aside class="case-nav">
         <p class="eyebrow" data-i18n data-en="Case outline" data-ko="프로젝트 구성">Case outline</p>
         <a href="#problem">01 · <span data-i18n data-en="Problem" data-ko="연구 배경">Problem</span></a>
@@ -180,9 +180,45 @@ const related = projects
       </div>
     </div>
 
+    {projectKo.sections && (
+      <div class="case-body shell" data-language-content="ko" lang="ko">
+        <aside class="case-nav">
+          <p class="eyebrow">프로젝트 구성</p>
+          {projectKo.sections.map((section, index) => (
+            <a href={'#ko-' + section.id}>
+              {String(index + 1).padStart(2, '0')} · {section.title}
+            </a>
+          ))}
+        </aside>
+        <div class="case-sections case-editorial">
+          {projectKo.sections.map((section, index) => (
+            <section
+              id={'ko-' + section.id}
+              class:list={{ 'case-result-section': section.id === 'results' }}
+            >
+              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h2>{section.title}</h2>
+              {section.bullets && (
+                <ul>
+                  {section.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              )}
+              {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+              {section.subsections?.map((subsection) => (
+                <div class="case-subsection">
+                  <h3>{subsection.title}</h3>
+                  <p>{subsection.content}</p>
+                </div>
+              ))}
+            </section>
+          ))}
+        </div>
+      </div>
+    )}
+
     <section class="case-tools shell">
       <div>
-        <p class="eyebrow" data-i18n data-en="Tools & methods" data-ko="기술 및 방법">Tools & methods</p>
+        <p class="eyebrow" data-i18n data-en="Tools & methods" data-ko={projectKo.sections ? '사용 기술' : '기술 및 방법'}>Tools & methods</p>
         <div class="large-tags">
           {project.tags.map((tag, index) => (
             <span data-i18n data-en={tag} data-ko={projectKo.tags[index]}>{tag}</span>
@@ -197,7 +233,7 @@ const related = projects
               <span
                 data-i18n
                 data-en={link.label}
-                data-ko={linkLabelsKo[link.label] || link.label}
+                data-ko={projectKo.sections && link.label === 'Paper' ? '논문 보기' : linkLabelsKo[link.label] || link.label}
               >{link.label}</span> ↗
             </a>
           ))}
