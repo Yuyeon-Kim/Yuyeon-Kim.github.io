@@ -308,7 +308,7 @@ export const projects: Project[] = [
     summary:
       "Used DOE, machine learning, SHAP, and constrained search to analyze the trade-off between deposition-process variation and throughput.",
     contribution:
-      "Analyzed the DOE datasets, compared ML models, interpreted SHAP results, searched constrained operating conditions, and evaluated confirmation experiments.",
+      "Analyzed the DOE datasets, compared ML models, interpreted SHAP results, searched constrained operating conditions, and prepared model-based process-evaluation proposals.",
     problem:
       "The process condition had to raise productivity without pushing within-wafer or wafer-to-wafer variation outside an acceptable range.",
     difficulty:
@@ -316,16 +316,16 @@ export const projects: Project[] = [
     firstApproach:
       "Analyzed correlations in the DOE data, compared Linear Regression, Random Forest, and Gradient Boosting, and evaluated R², RMSE, and cross-validation performance.",
     decision:
-      "Used the model to generate candidate conditions rather than treating predictions as ground truth, inspected influential variables with SHAP, and accepted a condition only after a confirmation experiment.",
+      "Inspected influential variables with SHAP and used model-based evaluation to select candidate conditions that met quality constraints for proposed process evaluation.",
     implementation:
       "Built a Python workflow for data analysis, model training, SHAP interpretation, differential-evolution search, constraint filtering, and experiment recommendation.",
     result:
-      "In the Spatial ALD exercise, raised UPH from 28.12 to 30.47—an 8.4% increase—while the confirmation experiment reduced WiW variation from 1.15% to 1.10%. In LPCVD, changing from five to six lots increased UPH by 20% but exposed a W2W trade-off from 0.96% to 2.86%.",
+      "In the Spatial ALD exercise, model-based evaluation identified a candidate with UPH 30.47—8.4% above 28.12—and WiW variation of 1.10%. For six-lot LPCVD, the model predicted a candidate with mean thickness 151.1 Å, W2W variation of 1.54%, and UPH 30; this was proposed for process evaluation.",
     learned:
       "Process optimization is not selecting the largest predicted gain; it requires defining quality guardrails first and validating the recommendation with the smallest useful experiment.",
     metrics: [
       { value: "+8.4%", label: "ALD throughput" },
-      { value: "1.10%", label: "confirmed WiW" },
+      { value: "1.10%", label: "model-estimated WiW" },
       { value: "+20%", label: "LPCVD UPH" },
     ],
     tags: [

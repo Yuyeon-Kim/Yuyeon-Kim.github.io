@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
   <title id="title">Semiconductor process optimization results</title>
-  <desc id="desc">A wafer process visualization with confirmed Spatial ALD and LPCVD performance comparisons.</desc>
+  <desc id="desc">A wafer process visualization with model-based Spatial ALD evaluation and LPCVD capacity trade-offs from a training exercise.</desc>
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0" stop-color="#07111f"/>
@@ -23,7 +23,7 @@
 
   <g transform="translate(70 215)" filter="url(#shadow)">
     <rect width="640" height="590" rx="34" fill="#0c1b32" stroke="#315efb" stroke-opacity="0.55"/>
-    <text x="44" y="62" fill="#d9e5ff" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">SPATIAL ALD · CONFIRMATION RUN</text>
+    <text x="44" y="62" fill="#d9e5ff" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">SPATIAL ALD · MODEL EVALUATION</text>
     <circle cx="305" cy="300" r="190" fill="url(#wafer)" stroke="#dbe7ff" stroke-width="5"/>
     <circle cx="305" cy="300" r="148" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="3"/>
     <circle cx="305" cy="300" r="94" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3"/>
@@ -40,7 +40,7 @@
 
   <g transform="translate(760 215)" font-family="Arial, Helvetica, sans-serif">
     <rect width="770" height="272" rx="30" fill="#f8fbff"/>
-    <text x="38" y="52" fill="#18243a" font-size="22" font-weight="700">ALD PROCESS RESULT</text>
+    <text x="38" y="52" fill="#18243a" font-size="22" font-weight="700">ALD MODEL-BASED RESULT</text>
     <text x="38" y="105" fill="#50627f" font-size="20">Throughput (UPH)</text>
     <rect x="260" y="80" width="260" height="32" rx="16" fill="#d8e2f5"/>
     <rect x="260" y="80" width="238" height="32" rx="16" fill="#7896da"/>
