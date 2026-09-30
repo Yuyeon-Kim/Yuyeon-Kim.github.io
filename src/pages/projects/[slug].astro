@@ -207,7 +207,8 @@ const related = projects
               {section.subsections?.map((subsection) => (
                 <div class="case-subsection">
                   <h3>{subsection.title}</h3>
-                  <p>{subsection.content}</p>
+                  {(Array.isArray(subsection.content) ? subsection.content : [subsection.content])
+                    .map((paragraph) => <p>{paragraph}</p>)}
                 </div>
               ))}
             </section>
@@ -219,11 +220,16 @@ const related = projects
     <section class="case-tools shell">
       <div>
         <p class="eyebrow" data-i18n data-en="Tools & methods" data-ko={projectKo.sections ? '사용 기술' : '기술 및 방법'}>Tools & methods</p>
-        <div class="large-tags">
+        <div class="large-tags" data-language-content={projectKo.sections ? 'en' : undefined}>
           {project.tags.map((tag, index) => (
             <span data-i18n data-en={tag} data-ko={projectKo.tags[index]}>{tag}</span>
           ))}
         </div>
+        {projectKo.sections && (
+          <div class="large-tags" data-language-content="ko" lang="ko">
+            {projectKo.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        )}
       </div>
       {project.links && project.links.length > 0 && (
         <div class="case-links">

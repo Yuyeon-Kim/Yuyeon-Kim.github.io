@@ -5,7 +5,7 @@ export interface ProjectSectionKo {
   title: string;
   paragraphs?: string[];
   bullets?: string[];
-  subsections?: { title: string; content: string }[];
+  subsections?: { title: string; content: string | string[] }[];
 }
 
 export interface ProjectKo {
@@ -186,13 +186,13 @@ export const projectsKo: ProjectKo[] = [
   },
   {
     slug: 'knowledge-distillation-crowd-counting',
-    title: '지식 증류 기반 군중 계수 모델 경량화',
+    title: '지식 증류 기반 Crowd Counting 모델 경량화',
     eyebrow: '엣지 AI · 모델 경량화 · ACK 2023',
     organization: '한이음 ICT 멘토링',
     summary:
-      '지하철 영상을 서버로 전송하지 않고 엣지 장치에서 혼잡도를 추정할 수 있도록 군중 계수 모델을 경량화했다.',
+      '지하철 혼잡도 분석을 위하여 Crowd Counting 모델을 경량화하였습니다. 영상 전송에 따른 네트워크 부담을 줄이고자 엣지 장치에서 인원수를 추정한 뒤 결과만 서버로 전송하는 방식을 채택하였습니다. 제한된 자원에서도 활용할 수 있도록 소형 모델에 지식 증류를 적용하여 예측 성능을 개선하였습니다.',
     contribution:
-      '공동 제1저자이자 발표자로 Teacher–Student 모델 조합, 지식 증류 손실 함수와 학습 일정을 설계하고 α 실험 및 시연 소프트웨어 개발에 참여했다.',
+      '공동 제1저자로 연구에 참여하였습니다. Teacher와 Student 모델을 선정하고 지식 증류 학습 파이프라인을 구현하였으며, 손실 함수와 학습 조건에 따른 성능 비교 실험을 담당하였습니다. 또한 ACK 2023에서 연구 결과를 발표하고 시연 소프트웨어 개발에 참여하였습니다.',
     problem:
       '여러 카메라의 영상을 서버로 전송하면 네트워크 비용이 커지지만, 정확도가 높은 군중 계수 모델은 엣지 장치에서 실행하기에 너무 컸다.',
     difficulty:
@@ -212,8 +212,57 @@ export const projectsKo: ProjectKo[] = [
       { value: '17.55%', label: 'MAE 개선' },
       { value: '0.543 MB', label: 'Student 모델' },
     ],
-    tags: ['지식 증류', 'M-SFANet', 'MCNN', 'PyTorch', '엣지 AI'],
-    imageAlt: '엣지 군중 계수와 혼잡도 알림 서비스를 시연한 지하철역 미니어처.',
+    tags: ['지식 증류', 'Crowd Counting', 'M-SFANet', 'MCNN', 'PyTorch', '엣지 AI'],
+    imageAlt: '엣지 Crowd Counting과 혼잡도 알림 서비스를 시연한 지하철역 미니어처.',
+    sections: [
+      {
+        id: 'results',
+        title: '주요 결과',
+        bullets: [
+          '최종 모델 크기 0.543 MB — Teacher 모델 대비 99.85% 감소',
+          '기존 MCNN 대비 MAE 110.2 → 90.86, 17.55% 개선',
+          'ACK 2023 공동 제1저자 논문 발표',
+          'ICT 멘토링 공모전 장려상 수상',
+        ],
+      },
+      {
+        id: 'background',
+        title: '개발 배경',
+        paragraphs: [
+          '2022년 이태원 참사 이후 밀집 공간의 안전 관리에 대한 관심이 높아졌으며, 2023년에는 김포골드라인의 과밀 문제로 지하철 혼잡도 관리의 필요성이 부각되었습니다.',
+          '본 프로젝트에서는 동시에 운행하는 여러 열차의 객차마다 4대의 카메라 영상을 처리하는 환경을 전제로 하였습니다. 모든 영상을 하나의 중앙 서버로 전송하여 실시간으로 분석하기에는 영상 전송량과 서버의 연산 부담이 크다는 문제가 있었습니다.',
+          '이에 엣지 장치에서 인원수를 추정한 뒤 결과만 서버로 전송하는 방식을 채택하였습니다. 이를 구현하기 위해서는 제한된 메모리와 연산 자원에서도 실행할 수 있는 경량 모델이 필요하였습니다.',
+          '기존 MCNN은 모델 크기가 작아 엣지 환경에 적합하였으나, 예측 오차를 줄일 필요가 있었습니다. 이에 예측 성능이 우수한 Teacher 모델의 출력을 Student 모델의 학습에 활용하여, 소형 모델의 크기를 유지하면서 성능을 개선하고자 하였습니다.',
+        ],
+      },
+      {
+        id: 'development',
+        title: '주요 개발 내용',
+        subsections: [
+          {
+            title: 'Teacher·Student 모델 선정',
+            content: [
+              '17개 Crowd Counting 모델을 대상으로 예측 성능, 파라미터 수 및 출력 형식을 비교하였습니다. 이를 바탕으로 M-SFANet을 Teacher 모델로, MCNN을 Student 모델로 선정하였습니다.',
+              'M-SFANet은 예측 성능이 우수하였으나 모델 크기가 366.6 MB였으며, MCNN은 0.532 MB로 작지만 상대적으로 예측 오차가 높았습니다. 두 모델 모두 동일한 형태의 인원 밀도 지도(density map)를 출력하므로, 출력값 간 차이를 활용한 지식 증류를 적용할 수 있었습니다.',
+            ],
+          },
+          {
+            title: '지식 증류 학습 구현',
+            content: [
+              'Teacher 모델을 먼저 학습한 후, 해당 모델의 예측 결과를 활용하여 Student 모델을 학습하는 2단계 과정을 구성하였습니다. Student의 출력과 정답 간 오차, Student와 Teacher의 출력 간 오차를 각각 손실 함수로 정의하고, 하이퍼파라미터 α로 두 손실의 비중을 조절하였습니다.',
+              '인원 밀도 지도를 직접 예측하는 회귀 모델의 특성을 고려하여 softmax와 temperature 없이 출력값 간 오차를 계산하였습니다. 학습률은 Cosine Annealing Warm Restarts 방식으로 조정하였습니다.',
+            ],
+          },
+          {
+            title: '학습 조건별 성능 비교',
+            content: [
+              'ShanghaiTech Part A 데이터셋에서 α를 0.1, 0.3, 0.5, 0.7로 설정하여 성능을 비교하였습니다. 평가 지표로 MAE와 RMSE를 사용하였으며, 실험한 조건 중 α가 0.1일 때 두 지표 모두 가장 우수한 결과를 보였습니다.',
+              '지식 증류 적용 후 모델 크기는 0.532 MB에서 0.543 MB로 0.011 MB 증가하였으며, MAE는 110.2에서 90.86으로 감소하였습니다. RMSE는 173.2에서 172.99로 기존과 유사한 수준을 유지하였습니다.',
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     slug: 'semiconductor-process-optimization',
