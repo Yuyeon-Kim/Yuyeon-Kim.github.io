@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { projects, type Project } from '@/data/portfolio';
 import { projectKoBySlug } from '@/data/portfolio-ko';
+import { koreanPublished } from '@/data/languages';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
@@ -180,7 +181,7 @@ const related = projects
       </div>
     </div>
 
-    {projectKo.sections && (
+    {koreanPublished && projectKo.sections && (
       <div class="case-body shell" data-language-content="ko" lang="ko">
         <aside class="case-nav">
           <p class="eyebrow">프로젝트 구성</p>
@@ -225,7 +226,7 @@ const related = projects
             <span data-i18n data-en={tag} data-ko={projectKo.tags[index]}>{tag}</span>
           ))}
         </div>
-        {projectKo.sections && (
+        {koreanPublished && projectKo.sections && (
           <div class="large-tags" data-language-content="ko" lang="ko">
             {projectKo.tags.map((tag) => <span>{tag}</span>)}
           </div>

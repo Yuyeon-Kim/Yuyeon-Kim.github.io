@@ -1,5 +1,6 @@
 ---
 import { profile } from '@/data/portfolio';
+import { koreanPublished } from '@/data/languages';
 
 interface Props {
   currentPage?: string;
@@ -55,7 +56,7 @@ const nav = [
         <a class="nav-github" href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
       </nav>
 
-      <div
+      {koreanPublished && <div
         class="language-switcher"
         role="group"
         aria-label="Choose language"
@@ -66,7 +67,7 @@ const nav = [
         <button type="button" data-language-option="en" aria-pressed="true">ENG</button>
         <span aria-hidden="true">/</span>
         <button type="button" data-language-option="ko" aria-pressed="false">KOR</button>
-      </div>
+      </div>}
 
       <button
         class="menu-button"

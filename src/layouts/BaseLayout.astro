@@ -1,6 +1,7 @@
 ---
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import { publishedLanguages } from '@/data/languages';
 import '@/styles/global.css';
 
 interface Props {
@@ -33,11 +34,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title data-en={title} data-ko={titleKo}>{title}</title>
-    <script is:inline>
+    <script is:inline define:vars={{ publishedLanguages }}>
       document.documentElement.classList.add('js');
       try {
         const savedLanguage = localStorage.getItem('portfolio-language');
-        const language = savedLanguage === 'ko' ? 'ko' : 'en';
+        const language = publishedLanguages.includes(savedLanguage) ? savedLanguage : 'en';
         document.documentElement.dataset.language = language;
         document.documentElement.lang = language === 'ko' ? 'ko' : 'en';
       } catch {
@@ -59,9 +60,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </main>
     <Footer />
 
-    <script is:inline>
+    <script is:inline define:vars={{ validLanguages: publishedLanguages }}>
       const validViews = ['all', 'research', 'data', 'semiconductor', 'robotics'];
-      const validLanguages = ['en', 'ko'];
 
       function currentLanguage() {
         try {
@@ -230,4 +230,3 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </script>
   </body>
 </html>
-
